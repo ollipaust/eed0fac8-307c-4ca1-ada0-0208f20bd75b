@@ -1,5 +1,5 @@
 {
-  "name": "eventec",
+  "name": "vennew",
   "private": true,
   "sideEffects": false,
   "type": "module",
@@ -10,13 +10,19 @@
     "typecheck": "tsc"
   },
   "dependencies": {
+    "@appbaseio/reactivesearch": "^4.2.0",
     "@remix-run/css-bundle": "^2.3.0",
     "@remix-run/node": "^2.3.0",
     "@remix-run/react": "^2.3.0",
     "@remix-run/serve": "^2.3.0",
     "isbot": "^3.6.8",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "styled-components": "^6.1.1"
+  },
+  "peerDependencies": {
+    "react": ">=15",
+    "react-dom": ">=15"
   },
   "devDependencies": {
     "@remix-run/dev": "^2.3.0",
@@ -24,6 +30,7 @@
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
     "eslint": "^8.38.0",
+    "prettier": "^3.1.0",
     "typescript": "^5.1.6"
   },
   "engines": {
