@@ -46,36 +46,9 @@ npm start
 
 - Configure TypeScript for static typing and improved code quality
 
-**Integrate Reactivesearch:**
+**Integrate Search Engine:**
 
-*[ReactiveSearch](https://opensource.appbase.io/reactivesearch/) is an open-source UI components library for React and React Native that works out of the box with appbase.io and Elasticsearch backends*
-
-- Install package @appbaseio/reactivesearch
+*[React InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/) React InstantSearch is an open-source React library that lets you create an instant search result experience using Algolia’s search API.
+- Install package
 - Integrate Provider
-- Check JSON Data resource:https://teclead-ventures.github.io/data/london-events.json
-
-**CORS Analysis log:**
-```sh
-Sending GET request to https://teclead-ventures.github.io/data/london-events.json
-
-Fired XHR event: loadstart
-Fired XHR event: readystatechange
-Fired XHR event: readystatechange
-Fired XHR event: progress
-Fired XHR event: progress
-Fired XHR event: readystatechange
-Fired XHR event: load
-XHR status: 200
-XHR status text:
-XHR exposed response headers:
-cache-control: max-age=600
-content-length: 22787
-content-type: application/json; charset=utf-8
-expires: Wed, 22 Nov 2023 09:17:27 GMT
-last-modified: Thu, 10 Nov 2022 15:20:03 GMT
-CORS Request
-```
-
-**CORS Analysis summary:**
-
-The provided log indicates that a GET request to the [API](https://teclead-ventures.github.io/data/london-events.json) was successful (status code 200), and the server returned a JSON response. The absence of CORS-related errors suggests that the resource is publicly accessible, making it suitable for use in a local development environment.
+- Check JSON Data resource:https://teclead-ventures.github.io/data/london-events.json // CORS OK
