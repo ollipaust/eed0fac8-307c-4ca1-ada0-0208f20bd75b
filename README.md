@@ -1,8 +1,6 @@
 # Welcome to Vennew!
 
-```
-Vennew strives to be your go-to hub for organizing your musical experiences with ease. Explore upcoming events and concerts featuring your favorite artists or emerging talents, and find the best ticket deals online. Simplify your event journey by conveniently managing trip details, all in one platform.
-```
+***Vennew*** *strives to be your go-to hub for organizing your musical experiences with ease. Explore upcoming events and concerts featuring your favorite artists or emerging talents, and find the best ticket deals online. Simplify your event journey by conveniently managing trip details, all in one platform.*
 
 - The platform is built with [Remix Docs](https://remix.run/docs), TypeScript and powered by Elasticsearch
 - Styling is provided by Styled-Components
