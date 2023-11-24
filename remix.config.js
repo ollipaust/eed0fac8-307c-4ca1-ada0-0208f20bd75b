@@ -4,7 +4,7 @@ export default {
   // appDirectory: "app",
   // Add the buildOptions configuration
   buildOptions: {
-    out: 'public', // Set this to the desired output directory
+    out: 'public/build', // Set this to the desired output directory
   },
   // assetsBuildDirectory: "public/build",
   // publicPath: "/build/",
