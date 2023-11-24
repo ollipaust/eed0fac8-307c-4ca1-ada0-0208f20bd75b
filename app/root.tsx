@@ -8,7 +8,11 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import Layout from "./ui/components/layout";
+
 import globalStylesheet from "~/ui/styles/global.css"
+import headerStylesheet from "~/ui/styles/header.css"
+import mainContentStylesheet from "~/ui/styles/mainContent.css"
+import footerStylesheet from "~/ui/styles/footer.css"
 
 export const links: LinksFunction = () => {
   return [
@@ -19,6 +23,18 @@ export const links: LinksFunction = () => {
     {
       rel: "stylesheet",
       href: globalStylesheet,
+    },
+    {
+      rel: "stylesheet",
+      href: headerStylesheet,
+    },
+    {
+      rel: "stylesheet",
+      href: mainContentStylesheet,
+    },
+    {
+      rel: "stylesheet",
+      href: footerStylesheet,
     },
   ];
 };

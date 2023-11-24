@@ -1,0 +1,36 @@
+@import './variables.scss';
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: auto;
+    background-color: $primary;
+    color: $light;
+    padding: 1rem 2rem;
+    text-shadow: $text-shadow-dark;
+
+    .logo {
+        > a {
+            font-family: $font-family-alt;
+            font-weight: $font-weight-bold;
+            font-size: 2rem;
+            color: $light;
+            &:hover {
+                color: $light;
+            }
+        }
+    }
+
+    .navitgation {
+        > a {
+            color: $light;
+            &:hover {
+                color: $primary--dark;
+            }
+        }
+    }
+}

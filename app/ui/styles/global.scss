@@ -1,0 +1,53 @@
+@import url('https://fonts.googleapis.com/css?family=Varela+Round&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import './variables.scss';
+@import './animations.scss';
+
+@font-face {
+  font-family: 'Neon Energy X';
+  src: url('https://res.cloudinary.com/ollip-dev/raw/upload/v1699355339/NeonEnergyX_aozoee.ttf')
+    format('truetype');
+}
+@font-face {
+  font-family: 'Neon Energy X Italic';
+  src: url('https://res.cloudinary.com/ollip-dev/raw/upload/v1699355339/NeonEnergyX_italic_ufxzty.ttf')
+    format('truetype');
+  font-style: $font-style-italic;
+}
+
+// Global Styles
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: $primary;
+  color: $light;
+}
+
+:root,
+html,
+body {
+    position: relative;
+  margin: 0;
+  padding: 0;
+  background: $bg-primary; 
+  font-family: $font-family; 
+  color: $text-color; 
+  font-size: $font-size;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:focus,
+  &:hover {
+    color: $link-hover-color;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-alt;
+}

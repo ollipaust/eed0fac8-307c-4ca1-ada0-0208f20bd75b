@@ -1,0 +1,99 @@
+// Colors
+$primary: #008cff;
+$primary--dark: #024277;
+
+$secondary: #04f17b;
+$secondary--dark: #066e3a;
+
+$light: #f0eee9;
+$light--75: rgba($light, 0.75);
+$light--50: rgba($light, 0.5);
+$light--25: rgba($light, 0.25);
+$light--15: rgba($light, 0.15);
+$light--10: rgba($light, 0.1);
+
+$dark: #141212;
+$dark--75: rgba($dark, 0.75);
+$dark--50: rgba($dark, 0.5);
+$dark--25: rgba($dark, 0.25);
+$dark--15: rgba($dark, 0.15);
+$dark--10: rgba($dark, 0.1);
+$dark--5: rgba($dark, 0.05);
+
+$grey: #4b4b4b;
+
+// Typography
+$font-family: 'Roboto', sans-serif;
+$font-family-alt: 'Varela Round', sans-serif;
+$font-size: 16px;
+$font-weight-normal: normal;
+$font-weight-bold: bold;
+$font-style-italic: italic;
+
+// Box Model
+$box-padding: 0.5rem;
+$box-border: 2px solid $primary;
+
+// Scrollbar
+$scrollbar-width: 0.5rem;
+$scrollbar-padding: 0.5rem;
+$scrollbar-track-bg: $dark;
+$scrollbar-thumb-bg: $primary;
+$scrollbar-thumb-hover-bg: $primary;
+
+// Backdrop Filter
+$backdrop-filter-blur-25: blur(0.25rem);
+$backdrop-filter-blur-100: blur(1rem);
+
+// Box Shadow
+$box-shadow-effect:
+  0px 10px 13px -7px rgba(0, 0, 0, 0.33),
+  5px 5px 15px 5px rgba(0, 0, 0, 0);
+
+// Header
+$header-padding: 1rem 2rem 1rem 3rem;
+$header-height: 75px;
+$header-max-height: 150px;
+
+// Button
+$button-border-radius: 5rem;
+$button-border: 2px solid $primary;
+
+// Iconsize
+$icon-width: 24px;
+$icon-height: 24px;
+
+// Keyframes
+$keyframes-duration: 3s;
+$keyframes-easing: ease-out;
+
+// Spacing
+$spacing-unit: 0.5rem;
+
+// Background and Text Colors
+$bg-primary: $dark;
+$text-color: $grey;
+$link-color: $primary;
+$link-hover-color: $secondary;
+
+// Backdrop Filter Options
+$backdrop-filter-none: none;
+$backdrop-filter-blur-5: blur(5px);
+$backdrop-filter-blur-10: blur(10px);
+$backdrop-filter-blur-15: blur(15px);
+$backdrop-filter-blur-25: blur(25px);
+$backdrop-filter-blur-50: blur(50px);
+$backdrop-filter-blur-100: blur(100px);
+
+// Box Shadow Options
+$box-shadow-none: none;
+$box-shadow-effect: 0px 5px 12px rgba(0, 0, 0, 0.325);
+
+// Text Shadows
+$text-shadow-dark: 0px 2px 3px $dark--50;
+
+// Breakpoints
+$breakpoint-small: 576px;
+$breakpoint-medium: 768px;
+$breakpoint-large: 992px;
+$breakpoint-xlarge: 1200px;
