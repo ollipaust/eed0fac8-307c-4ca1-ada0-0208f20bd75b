@@ -1,5 +1,5 @@
 [build]
-command = "npm run build"
+command = "pnpm run build"
 publish = "public"
 
 # Set immutable caching for static files, because they have fingerprinted filenames
