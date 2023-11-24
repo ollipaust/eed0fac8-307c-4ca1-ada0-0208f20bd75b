@@ -3,7 +3,7 @@ import EventList from "~/ui/components/eventList";
 
 export const meta: MetaFunction = () => {
   return [
-    { title: "New Remix App" },
+    { title: "Vennew - Events" },
     { name: "description", content: "Welcome to Remix!" },
   ];
 };

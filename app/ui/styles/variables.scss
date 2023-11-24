@@ -24,7 +24,7 @@ $grey: #4b4b4b;
 
 // Typography
 $font-family: 'Roboto', sans-serif;
-$font-family-alt: 'Varela Round', sans-serif;
+$font-family-alt: 'Satisfy', sans-serif;
 $font-size: 16px;
 $font-weight-normal: normal;
 $font-weight-bold: bold;
@@ -40,11 +40,6 @@ $scrollbar-thumb-hover-bg: $primary;
 // Backdrop Filter
 $backdrop-filter-blur-25: blur(0.25rem);
 $backdrop-filter-blur-100: blur(1rem);
-
-// Box Shadow
-$box-shadow-effect:
-  0px 10px 13px -7px rgba(0, 0, 0, 0.33),
-  5px 5px 15px 5px rgba(0, 0, 0, 0);
 
 // Header
 $header-padding: 1rem 2rem 1rem 3rem;
@@ -82,8 +77,10 @@ $backdrop-filter-blur-50: blur(50px);
 $backdrop-filter-blur-100: blur(100px);
 
 // Box Model
-$box-padding: 0.5rem;
+$box-padding: 1rem;
 $box-border: 1px solid $light--25;
+$box-border-dark: 1px solid $dark--25;
+
 $box-shadow-none: none;
 $box-shadow-effect: 0px 3px 5 $dark--50;
 
