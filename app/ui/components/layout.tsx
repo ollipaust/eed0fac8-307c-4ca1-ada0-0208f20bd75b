@@ -1,7 +1,7 @@
 import React from 'react';
 import type { ReactNode } from 'react';
 import { EventProvider } from '../../utils/eventProvider';
-
+import Header from './header';
 interface LayoutProps {
   children: ReactNode;
 }
@@ -10,12 +10,10 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <EventProvider>
       <div>
-        <header>
-          <h1>Your App Title</h1>
-        </header>
+        <Header />
         <main>{children}</main>
-        <footer>
-          <p>&copy; {new Date().getFullYear()} Your Company</p>
+        <footer id="Footer">
+          <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
         </footer>
       </div>
     </EventProvider>

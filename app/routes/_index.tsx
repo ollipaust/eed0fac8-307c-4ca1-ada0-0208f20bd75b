@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import EventList from "~/ui/components/eventList";
-import Layout from "~/ui/components/layout";
+
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -10,8 +10,8 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <Layout>
-      <EventList />
-    </Layout>
+      <>
+        <EventList />
+      </>
   );
 }

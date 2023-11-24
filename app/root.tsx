@@ -1,4 +1,3 @@
-import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
   Links,
@@ -8,11 +7,21 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import Layout from "./ui/components/layout";
+import globalStylesheet from "~/ui/styles/global.css"
 
-export const links: LinksFunction = () => [
-  ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
-];
-
+export const links: LinksFunction = () => {
+  return [
+    {
+      rel: "stylesheet",
+      href: "https://unpkg.com/modern-css-reset@1.4.0/dist/reset.min.css",
+    },
+    {
+      rel: "stylesheet",
+      href: globalStylesheet,
+    },
+  ];
+};
 export default function App() {
   return (
     <html lang="en">
@@ -23,10 +32,12 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <Layout>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          <LiveReload />
+        </Layout>
       </body>
     </html>
   );

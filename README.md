@@ -38,7 +38,7 @@ npm start
 
 **Design System and UI Components:**
 
-- Install Styled-Components
+- Install SASS compiler & concurrently
 - Establish a design system for consistent styling
 - Develop reusable UI components using Styled-Components
 

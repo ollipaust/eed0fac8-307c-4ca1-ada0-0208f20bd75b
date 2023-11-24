@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEventContext } from '../../utils/eventProvider';
 
-const EventList: React.FC = () => {
+const EventList: React.FC = ({props}: any) => {
   const { events } = useEventContext();
 
   return (
-    <div>
+    <div {...props}>
       <h1>London Events</h1>
       <ul>
         {events.map((event) => (
