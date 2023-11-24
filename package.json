@@ -8,6 +8,7 @@
     "dev": "concurrently \"pnpm run dev:css\" \"pnpm run dev-remix\"",
     "dev-remix": "remix dev --manual",
     "start": "remix-serve ./build/index.js",
+    "produce": "pnpm run build && pnpm start",
     "typecheck": "tsc",
     "build:css": "node-sass ./app/ui/styles -o ./app/ui/styles --output-style compressed",
     "dev:css": "pnpm run build:css && node-sass -rw ./app/ui/styles -o ./app/ui/styles"

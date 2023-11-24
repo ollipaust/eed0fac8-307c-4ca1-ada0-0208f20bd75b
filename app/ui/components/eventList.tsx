@@ -1,11 +1,11 @@
 import React from 'react';
 import { useEventContext } from '../../utils/eventProvider';
+import { cropTitle } from '~/utils/cropTitle';
 import TimeFormat from '~/utils/formatTime';
 
 const EventList: React.FC = ({ props }: any) => {
   const { events } = useEventContext();
-  const flyerImageMaxWidth = '300px'
-
+  const flyerImageMaxWidth = '500px';
   return (
     <div className="eventsGrid" {...props}>
       {events.map((event, index) => (
@@ -14,10 +14,10 @@ const EventList: React.FC = ({ props }: any) => {
             <img src={event.flyerFront ? event.flyerFront : '/placeholder.png'} alt="Event Flyer" style={{ maxWidth: flyerImageMaxWidth }} />
           </div>
           <div className='box__body'>
-            <span>{event.title}</span>
+            <span>{cropTitle(event.title)}</span>
           </div>
           <div className='box__foot'>
-            <TimeFormat startTime={event.startTime} endTime={event.endTime} />
+            <TimeFormat startTime={event.startTime} endTime={event.endTime} fallBackTime={event.date} />
           </div>
         </div>
       ))}
