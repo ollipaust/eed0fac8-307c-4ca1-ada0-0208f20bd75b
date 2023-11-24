@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
-import EventList from "~/api/server";
-
+import EventList from "~/ui/components/eventList";
+import Layout from "~/ui/components/layout";
 export const meta: MetaFunction = () => {
   return [
     { title: "New Remix App" },
@@ -10,9 +10,8 @@ export const meta: MetaFunction = () => {
 
 export default function Index() {
   return (
-    <div style={{ fontFamily: "system-ui, sans-serif", lineHeight: "1.8" }}>
-      <h1>Lorem Ipsum.</h1>
+    <Layout>
       <EventList />
-    </div>
+    </Layout>
   );
 }
