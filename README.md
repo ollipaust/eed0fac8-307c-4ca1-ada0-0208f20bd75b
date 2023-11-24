@@ -48,7 +48,11 @@ npm start
 
 **Integrate Search Engine:**
 
-*[React InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/) React InstantSearch is an open-source React library that lets you create an instant search result experience using Algolia’s search API.
+*[React InstantSearch](https://www.algolia.com/doc/guides/building-search-ui/what-is-instantsearch/react/) is an open-source React library that lets you create an instant search result experience using Algolia’s search API.
 - Install package
 - Integrate Provider
 - Check JSON Data resource:https://teclead-ventures.github.io/data/london-events.json // CORS OK
+
+**UI Implementation & Styling**
+- web styling
+- mobile styling
