@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 interface Event {
   _id: string;
   title: string;
-  flyerFront: string;
+  flyerFront?: string;
   attending: number;
   date: string;
   startTime: string;
@@ -16,7 +16,7 @@ interface Event {
     live: boolean;
     direction: string;
   };
-  pick: {
+  pick?: {
     id: string;
     blurb: string;
   };
@@ -31,7 +31,7 @@ interface Event {
 
 const EventList: React.FC = () => {
   const [events, setEvents] = useState<Event[]>([]);
-
+    const flyerImageWidth = '500px'
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -59,9 +59,9 @@ const EventList: React.FC = () => {
             <p>Date: {event.date}</p>
             <p>Time: {event.startTime} - {event.endTime}</p>
             <p>Venue: {event.venue.name}</p>
-            <p>Pick Blurb: {event.pick?.blurb}</p>
+            {event.pick && <p>Pick Blurb: {event.pick.blurb}</p>}
             <p>Artists: {event.artists.map((artist) => artist.name).join(', ')}</p>
-            <img src={event.flyerFront} alt="Event Flyer" style={{ maxWidth: '100%' }} />
+            <img src={event.flyerFront ? event.flyerFront : '/placeholder.png'} alt="Event Flyer" style={{ maxWidth: flyerImageWidth }} />
           </li>
         ))}
       </ul>
