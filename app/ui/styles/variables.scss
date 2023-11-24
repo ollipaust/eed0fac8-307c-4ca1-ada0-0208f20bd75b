@@ -30,10 +30,6 @@ $font-weight-normal: normal;
 $font-weight-bold: bold;
 $font-style-italic: italic;
 
-// Box Model
-$box-padding: 0.5rem;
-$box-border: 2px solid $primary;
-
 // Scrollbar
 $scrollbar-width: 0.5rem;
 $scrollbar-padding: 0.5rem;
@@ -85,9 +81,11 @@ $backdrop-filter-blur-25: blur(25px);
 $backdrop-filter-blur-50: blur(50px);
 $backdrop-filter-blur-100: blur(100px);
 
-// Box Shadow Options
+// Box Model
+$box-padding: 0.5rem;
+$box-border: 1px solid $light--25;
 $box-shadow-none: none;
-$box-shadow-effect: 0px 5px 12px rgba(0, 0, 0, 0.325);
+$box-shadow-effect: 0px 3px 5 $dark--50;
 
 // Text Shadows
 $text-shadow-dark: 0px 2px 3px $dark--50;
