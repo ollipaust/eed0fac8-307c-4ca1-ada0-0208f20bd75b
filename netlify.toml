@@ -1,0 +1,8 @@
+[build]
+  command = "pnpm run build"
+  publish = "public" # Make sure this matches the output directory in remix.config.js
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
