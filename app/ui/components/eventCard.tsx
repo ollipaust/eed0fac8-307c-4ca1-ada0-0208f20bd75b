@@ -14,7 +14,7 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   const { events } = useEventContext();
-  const { addToCart } = useShoppingCartContext();
+  const { addToCart, removeFromCart, cart } = useShoppingCartContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
@@ -41,6 +41,15 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
     setShowSideDrawer(true);
     setSelectedEvent(event);
   };
+  const handleCartIconClick = (event: any) => {
+    const isInCart = cart.some((item) => item._id === event._id);
+
+    if (isInCart) {
+      removeFromCart(event);
+    } else {
+      addToCart(event);
+    }
+  };
 
   const openGoogleMapsInNewTab = () => {
     if (selectedEvent) {
@@ -65,17 +74,21 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
         {resultAmount > 0 ? (
           filteredEvents.map((event, index) => (
             event.flyerFront && (
-              <div key={event._id} className={`box box__${index}`}>
+              <div
+                key={event._id}
+                className={`box box__${index}`}
+                style={{ display: cart.some((item) => item._id === event._id) ? 'none' : 'inline-flex' }}
+              >
                 <div className='box__head'>
                   <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
                   <div className='svgCartIcon__container'>
-                  <SvgCartIconPlus
-                    svgCartType="plus"
-                    width={48}
-                    height={48}
-                    onClick={() => addToCart(event)} // Add this line to call addToCart when the SVG is clicked
-                  />
-                </div>
+                    <SvgCartIconPlus
+                      svgCartType={cart.some((item) => item._id === event._id) ? 'full' : 'plus'}
+                      width={48}
+                      height={48}
+                      onClick={() => handleCartIconClick(event)}
+                    />
+                  </div>
                 </div>
                 <div className='box__body'>
                   <p>{event.title}</p>

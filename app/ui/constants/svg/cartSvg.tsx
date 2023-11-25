@@ -4,7 +4,7 @@ interface SvgCartIconFullProps {
     svgCartType?: string;
     width?: number;
     height?: number;  
-    cartItemCount?: number; // New prop to indicate the number of items in the cart
+    cartItemCount?: number;
 
 }
 
@@ -12,7 +12,7 @@ interface SvgCartIconPlusProps {
     svgCartType?: string;
     width?: number;
     height?: number;
-    onClick?: () => void; // Add onClick as an optional prop
+    onClick?: () => void;
 }
 
 export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, width, height, cartItemCount}) => (

@@ -1,15 +1,13 @@
 import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
 
-// Define the context
 type EventContextType = {
-  events: any[]; // maybe adjust type
+  events: any[]; 
   loading: boolean;
   error: Error | null;
 };
 
 const EventContext = createContext<EventContextType | undefined>(undefined);
 
-// create custom hook to use context
 export const useEventContext = () => {
   const context = useContext(EventContext);
   if (!context) {
@@ -19,7 +17,7 @@ export const useEventContext = () => {
 };
 
 export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [events, setEvents] = useState<any[]>([]); // maybe adjust type
+  const [events, setEvents] = useState<any[]>([]); 
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
