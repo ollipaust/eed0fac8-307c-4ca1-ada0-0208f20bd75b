@@ -16,9 +16,7 @@ const TimeFormat: React.FC<TimeFormatProps> = ({ startTime, endTime, fallBackTim
   } else {
      return (
     <>
-      Start: {formatDateAndTime(startDateTime)}
-      <br />
-      End: {formatDateAndTime(endDateTime)}
+       {formatDateAndTime(startDateTime)} &mdash; {formatDateAndTime(endDateTime)}
     </>
   ); 
   }

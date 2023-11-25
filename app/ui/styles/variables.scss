@@ -1,9 +1,9 @@
 // Colors
-$primary: #008cff;
-$primary--dark: #024277;
+$primary: #125398;
+$primary--dark: #212D40;
 
-$secondary: #04f17b;
-$secondary--dark: #066e3a;
+$secondary: #007FFF;
+$secondary--dark: #003D7A;
 
 $light: #f0eee9;
 $light--75: rgba($light, 0.75);
@@ -12,7 +12,7 @@ $light--25: rgba($light, 0.25);
 $light--15: rgba($light, 0.15);
 $light--10: rgba($light, 0.1);
 
-$dark: #141212;
+$dark: #11151C;
 $dark--75: rgba($dark, 0.75);
 $dark--50: rgba($dark, 0.5);
 $dark--25: rgba($dark, 0.25);
@@ -20,6 +20,7 @@ $dark--15: rgba($dark, 0.15);
 $dark--10: rgba($dark, 0.1);
 $dark--5: rgba($dark, 0.05);
 
+$darkest: #080A0D;
 $grey: #4b4b4b;
 
 // Typography
@@ -82,10 +83,10 @@ $box-border: 1px solid $light--25;
 $box-border-dark: 1px solid $dark--25;
 
 $box-shadow-none: none;
-$box-shadow-effect: 0px 3px 5 $dark--50;
+$box-shadow-effect: 0px 3px 5px $darkest;
 
 // Text Shadows
-$text-shadow-dark: 0px 2px 3px $dark--50;
+$text-shadow-dark: 0px 2px 3px $dark;
 
 // Breakpoints
 $breakpoint-small: 576px;

@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
 import type { ReactNode } from 'react';
 
 // Define the context
@@ -23,7 +23,6 @@ export const useEventContext = () => {
 interface EventProviderProps {
   children: ReactNode;
 }
-
 export const EventProvider: React.FC<EventProviderProps> = ({ children }) => {
   const [events, setEvents] = useState<any[]>([]); // maybe adjust type
   const [loading, setLoading] = useState<boolean>(true);
@@ -48,8 +47,10 @@ export const EventProvider: React.FC<EventProviderProps> = ({ children }) => {
   }, []);
 
   return (
-    <EventContext.Provider value={{ events, loading, error }}>
-      {children}
-    </EventContext.Provider>
+    <Suspense fallback={<div>Loading...</div>}>
+      <EventContext.Provider value={{ events, loading, error }}>
+        {children}
+      </EventContext.Provider>
+    </Suspense>
   );
 };

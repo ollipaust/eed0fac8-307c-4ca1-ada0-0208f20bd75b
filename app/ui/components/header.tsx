@@ -1,4 +1,5 @@
 import React from 'react';
+import { SvgIconCartFull } from '../constants/svg/cartSvg';
 
 const Header: React.FC = ({ props }: any) => {
   return (
@@ -8,8 +9,12 @@ const Header: React.FC = ({ props }: any) => {
             <span>Vennew</span>
         </a>
       </div>
-      <nav className="navitgation">
-        <a href="/#Footer">Link 1</a>
+      <nav className="navigation">
+        <SvgIconCartFull
+          svgCartType="full"
+          width={24}
+          height={24}
+        />
       </nav>
     </header>
   );

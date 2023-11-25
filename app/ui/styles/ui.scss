@@ -6,7 +6,8 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    position: relative;
+    position: fixed;
+    z-index: 100;
     width: 100%;
     height: auto;
     background-color: $primary;
@@ -27,11 +28,11 @@
         }
     }
 
-    .navitgation {
+    .navigation {
         > a {
             color: $light;
             &:hover {
-                color: $primary--dark;
+                color: $light--50;
             }
         }
     }
@@ -40,6 +41,7 @@
 .mainContent {
     position: relative;
     padding: 2rem 4rem;
+    top: 100px;
 
 }
 
@@ -50,7 +52,7 @@
     width: 1080px;
     margin: 0 auto;
 }
-
+// event cards
 .box {
     display: inline-flex;
     flex-direction: column;
@@ -60,12 +62,12 @@
     width: 300px;
     height: 450px;
     margin: 1rem;
-    background-color: $light;
     box-shadow: $box-shadow-effect;
     border-radius: 0.5rem;
     overflow: hidden;
 
     &__head {
+        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -74,13 +76,59 @@
         height: 300px;
         border-bottom: $box-border;
         overflow: hidden;
-        background-color: $light--25;
+        background-color: transparent;
+        &:hover {
+            .flyerImg {
+                transform: scale(1.1);
+                filter: grayscale(0.6) brightness(0.1);
+            }
+            .svgCartIcon {
+                &--plus {
+                    opacity: 1;
+                }
+                &__container {
+                    opacity: 1;
+                    transform: translate(-125%, -125%) scale(1);
+                }
+            }
+          }
         .flyerImg {
             min-height: 300px;
             max-width: 600px;
-            transition: transform 0.5s ease;
-            &:hover {
-                transform: scale(1.1);
+            transform: scale(1);
+            filter: none;
+            transition: all 0.5s ease;
+        }
+        .svgCartIcon {
+            transition: all 0.5s ease;
+            &--plus {
+                opacity: 1;
+                fill: $secondary;
+            }
+            
+            &__container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                position: absolute;
+                top: 100%;
+                left: 100%;
+                width: 64px;
+                height: 64px;
+                border-radius: 50%;
+                opacity: 1;
+                background-color: #f0eee9;
+                transform: translate(-100%, -100%) scale(.6);
+                transition: opacity 0.5s ease, transform 0.5s ease;
+
+                &:hover {
+                   .svgCartIcon {
+                    &--plus {
+                        fill: $secondary--dark;
+                        transform: scale(1.1);
+                    }
+                   } 
+                }
             }
         }
     }
@@ -92,10 +140,21 @@
     &__foot {
         border-bottom: none ;
         height: max-content;
-        font-size: 0.85rem;
         text-align: center;
+
+        .eventDate {
+            font-size: 0.75rem;
+        }
+        
+        .svgPinIcon {
+            transform: translate(-20%, 20%);
+            &--full {
+                fill: $primary
+            }
+        }
     }
     &__body,  &__foot {
+        background-color: $light;
         padding: 0.5rem 1rem;
         width: 100%;
     }
