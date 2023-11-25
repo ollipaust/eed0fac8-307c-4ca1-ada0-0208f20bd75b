@@ -12,7 +12,7 @@
     height: auto;
     background-color: $primary;
     color: $light;
-    padding: 0 2rem;
+    padding: 0.5rem 2rem;
     text-shadow: $text-shadow-dark;
     box-shadow: $box-shadow-effect;
 
@@ -80,8 +80,7 @@
 .eventsGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: 16px;
-    width: 1080px;
+    width: 900px;
     margin: 0 auto;
 }
 // event cards
@@ -111,8 +110,8 @@
         background-color: transparent;
         &:hover {
             .flyerImg {
-                transform: scale(1.1);
-                filter: grayscale(0.6) brightness(0.1);
+                transform: scale(1.05);
+                filter: grayscale(0.6) brightness(0.5);
             }
             .svgCartIcon {
                 &--plus {
@@ -129,7 +128,7 @@
             max-width: 600px;
             transform: scale(1);
             filter: none;
-            transition: all 0.5s ease;
+            transition: filter 1s ease,transform 2s ease;
         }
         .svgCartIcon {
             transition: all 0.5s ease;
@@ -177,10 +176,15 @@
         height: max-content;
         text-align: center;
 
-        .eventDate {
-            font-size: 0.75rem;
+        .eventDate, .eventLocation {
+            font-size: 0.8rem;
+            margin: 0.1rem auto;
         }
-        
+
+        .eventLocation__direction:hover {
+            cursor: pointer;
+        }
+
         .svgPinIcon {
             transform: translate(-20%, 20%);
             &--full {
@@ -206,3 +210,65 @@
     height: 200px;
     padding: 1rem 2rem;
 }
+// Add your global styles here, if needed
+
+.side-drawer {
+    position: fixed;
+    top: 57px;
+    right: -400px; // Start with the side-drawer off-screen
+    bottom: 0;
+    width: 400px; // Adjust the width as needed
+    background-color: #fff;
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); // Add a subtle box shadow
+    transition: transform 0.3s ease-in-out; // Smooth transition effect
+  
+    // Optionally, add more styling to enhance the appearance
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+  
+    // Adjust as needed for a close button
+    button {
+      align-self: flex-end;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #007bff; // Example button color
+      color: #fff;
+      border: none;
+      cursor: pointer;
+
+      &:first-of-type {
+        margin-right: 1rem;
+      }
+  
+      &:hover {
+        background-color: #0056b3; // Example button color on hover
+      }
+    }
+  
+    // Add more styling for the content inside the side-drawer, such as iframe
+    iframe {
+      width: 100%;
+      height: calc(100% - 40px); // Adjust for padding
+      border: none;
+    }
+  }
+  
+  // Optionally, you can add media queries for responsiveness
+  @media (max-width: 767px) {
+    .side-drawer {
+      width: 100%;
+      right: -100%; // Start with the side-drawer off-screen on smaller screens
+    }
+  }
+  
+  // Add a class to transition the side-drawer to its visible state
+  .side-drawer {
+    transform: translateX(0); // Slide in the side-drawer
+    transition: transform 0.5s ease-in-out;
+    &--visible {
+        transform: translateX(-400px); // Slide in the side-drawer
+        transition: transform 0.5s ease-in-out;
+      }
+  }
+  

@@ -1,6 +1,6 @@
 // routes/_index.tsx
 import type { MetaFunction } from "@remix-run/node";
-import EventList from "~/ui/components/eventList";
+import EventCard from "~/ui/components/eventCard";
 import { useSearch } from '~/utils/searchContextProvider'; // Adjust the path
 
 export const meta: MetaFunction = () => {
@@ -15,7 +15,7 @@ export default function Index() {
 
   return (
     <>
-      <EventList searchTerm={searchTerm} />
+      <EventCard searchTerm={searchTerm} />
     </>
   );
 }

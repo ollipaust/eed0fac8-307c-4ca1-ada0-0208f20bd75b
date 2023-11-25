@@ -6,13 +6,15 @@ import { SvgCartIconPlus } from '../constants/svg/cartSvg';
 import { SvgPinIcon } from '../constants/svg/pinSvg';
 import TimeFormat from '~/utils/formatTime';
 
-interface EventListProps {
+interface EventCardProps {
   searchTerm: string;
 }
 
-const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
+const EventCard: React.FC<EventCardProps> = ({ searchTerm }) => {
   const { events } = useEventContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
+  const [showSideDrawer, setShowSideDrawer] = useState(false);
+  const [selectedEvent, setSelectedEvent] = useState<any>(null); // Change 'any' to the actual type of your event object
 
   useEffect(() => {
     const isDataReceived = events.length > 0;
@@ -31,15 +33,24 @@ const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
     }
   }, [events, searchTerm]);
 
-  // Events & Cities comparison test
-  useEffect(() => {
-    const isDataReceived = events.length > 0;
-    if (isDataReceived) {
-      const londonEventsCount = events.filter((event) => event.city.toLowerCase() === 'london').length;
-      console.log('Total events:', events.length);
-      console.log('Events with the city "london":', londonEventsCount);
+  const handleGoogleMapsLinkClick = (event: any) => {
+    setShowSideDrawer(true);
+    setSelectedEvent(event);
+  };
+
+  const openGoogleMapsInNewTab = () => {
+    if (selectedEvent) {
+      window.open(
+        `https://www.google.com/maps/dir//${encodeURIComponent(selectedEvent.venue.name)},${encodeURIComponent(selectedEvent.city)},${encodeURIComponent(selectedEvent.country)}`,
+        '_blank'
+      );
     }
-  }, [events]);
+  };
+
+  const closeSideDrawer = () => {
+    setShowSideDrawer(false);
+  };
+
   return (
     <>
       <div className="eventsGrid">
@@ -62,7 +73,14 @@ const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
               <div className='box__foot'>
                 <p className='eventLocation'>
                   <SvgPinIcon className="full" width={16} height={16} />
-                  <strong>{event.venue.name}</strong>
+                  <strong>
+                    <a
+                      onClick={() => handleGoogleMapsLinkClick(event)}
+                      className={`eventLocation__direction ${showSideDrawer && selectedEvent === event ? 'active' : ''}`}
+                    >
+                      {event.venue.name}
+                    </a>
+                  </strong>
                   {' in ' + capitalizeFirstLetter(event.city) + ', ' + event.country.toUpperCase()}
                 </p>
                 <p className='eventDate'>
@@ -73,8 +91,29 @@ const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
           )
         ))}
       </div>
+
+      <div className={`side-drawer ${showSideDrawer && selectedEvent ? 'side-drawer--visible' : ''}`}>
+        {showSideDrawer && selectedEvent && (
+          <>
+            <iframe
+              title={`Google Maps - ${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`}
+              width="100%"
+              height="100%"
+              frameBorder="0"
+              style={{ border: '0' }}
+              src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=AIzaSyDdq3rfiqsjntrw2YaAt4KozdZr4u5o7uU`}
+              allowFullScreen
+            />
+            <div className="hidden-drawer"></div>
+          </>
+        )}
+        <div className="drawer-buttons">
+          <button onClick={closeSideDrawer}>Close</button>
+          <button onClick={openGoogleMapsInNewTab}>Open in Google Maps</button>
+        </div>
+      </div>
     </>
   );
 };
 
-export default EventList;
+export default EventCard;
