@@ -31,6 +31,15 @@ const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
     }
   }, [events, searchTerm]);
 
+  // Events & Cities comparison test
+  useEffect(() => {
+    const isDataReceived = events.length > 0;
+    if (isDataReceived) {
+      const londonEventsCount = events.filter((event) => event.city.toLowerCase() === 'london').length;
+      console.log('Total events:', events.length);
+      console.log('Events with the city "london":', londonEventsCount);
+    }
+  }, [events]);
   return (
     <>
       <div className="eventsGrid">
