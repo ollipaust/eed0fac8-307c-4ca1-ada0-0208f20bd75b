@@ -32,7 +32,7 @@ const Header: React.FC = ({ props }: any) => {
         </div>
       </div>
       <nav className="navigation">
-        <SvgCartIconFull fill="red" svgCartType="full" width={32} height={32} cartItemCount={cart.length} />
+        <SvgCartIconFull svgCartType="full" width={32} height={32} cartItemCount={cart.length} />
       </nav>
     </header>
   );
