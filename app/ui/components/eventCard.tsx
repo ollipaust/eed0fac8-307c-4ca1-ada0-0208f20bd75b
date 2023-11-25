@@ -18,7 +18,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
-  const resultAmount = filteredEvents.length;
+  const availableEvents = filteredEvents.length - cart.length;
 
   useEffect(() => {
     const isDataReceived = events.length > 0;
@@ -41,6 +41,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
     setShowSideDrawer(true);
     setSelectedEvent(event);
   };
+  
   const handleCartIconClick = (event: any) => {
     const isInCart = cart.some((item) => item._id === event._id);
 
@@ -66,12 +67,11 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
 
   return (
     <>
-      
       <div className="eventsResults">
-        <span className='eventsResults__content h2'>{`Public Events: ${resultAmount}`}</span>
+        <span className='eventsResults__content h2'>{`Public Events: ${availableEvents}`}</span>
       </div>
       <div className="eventsGrid">
-        {resultAmount > 0 ? (
+        {availableEvents > 0 ? (
           filteredEvents.map((event, index) => (
             event.flyerFront && (
               <div

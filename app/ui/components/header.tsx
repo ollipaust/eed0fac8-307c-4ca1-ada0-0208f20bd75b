@@ -1,7 +1,7 @@
 import React from 'react';
 import { SvgCartIconFull } from '../constants/svg/cartSvg';
 import { useSearch } from '../../utils/searchContextProvider';
-import { SvgSearchIcon } from '~/ui/constants/svg/searchSvg';
+import { SvgSearchIcon } from '~/ui/constants/svg/searchSvg'; // Update the import path accordingly
 import { useShoppingCartContext } from '~/utils/shoppingCartContextProvider';
 
 const Header: React.FC = ({ props }: any) => {
@@ -32,7 +32,7 @@ const Header: React.FC = ({ props }: any) => {
         </div>
       </div>
       <nav className="navigation">
-        <SvgCartIconFull svgCartType="full" width={24} height={24} cartItemCount={cart.length} />
+        <SvgCartIconFull fill="red" svgCartType="full" width={32} height={32} cartItemCount={cart.length} />
       </nav>
     </header>
   );

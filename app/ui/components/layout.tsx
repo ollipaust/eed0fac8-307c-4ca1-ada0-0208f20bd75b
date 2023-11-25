@@ -6,7 +6,6 @@ import { ShoppingCartProvider } from '~/utils/shoppingCartContextProvider';
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
     <SearchProvider>
-      
       <ShoppingCartProvider>
         <Header />
         <main className="mainContent">{children}</main>
