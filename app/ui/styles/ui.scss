@@ -12,7 +12,7 @@
     height: auto;
     background-color: $primary;
     color: $light;
-    padding: 1rem 2rem;
+    padding: 0 2rem;
     text-shadow: $text-shadow-dark;
 
     .logo {
@@ -133,9 +133,12 @@
         }
     }
     &__body {
-        font-weight: bold;
-        border-bottom: $box-border-dark;
+        display: inline-flex;
         flex: 1;
+        justify-content: center;
+        align-items: center;
+        font-weight: 700;
+        border-bottom: $box-border-dark;
     }
     &__foot {
         border-bottom: none ;

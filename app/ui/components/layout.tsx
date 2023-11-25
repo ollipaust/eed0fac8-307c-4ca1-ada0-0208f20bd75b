@@ -9,13 +9,11 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <EventProvider>
-      <div>
-        <Header />
-        <main className="mainContent">{children}</main>
-        <footer id="Footer" className="footer">
-          <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
-        </footer>
-      </div>
+      <Header />
+      <main className="mainContent">{children}</main>
+      <footer id="Footer" className="footer">
+        <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
+      </footer>
     </EventProvider>
   );
 };

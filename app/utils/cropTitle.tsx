@@ -1,5 +1,5 @@
 export const cropTitle = (title: string): string => {
-    const maxLength = 115;
+    const maxLength = 100;
     const ellipsisLength = 3;
 
     if (title.length > maxLength) {
