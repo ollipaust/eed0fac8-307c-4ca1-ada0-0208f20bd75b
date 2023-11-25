@@ -7,12 +7,12 @@ import { SvgCartIconPlus } from '../constants/svg/cartSvg';
 import { SvgPinIcon } from '../constants/svg/pinSvg';
 import TimeFormat from '~/utils/formatTime';
 
-interface EventCardProps {
+interface EventCardsProps {
   searchTerm: string;
   apiKey: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
+const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
   const { events } = useEventContext();
   const { addToCart, removeFromCart, cart } = useShoppingCartContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
@@ -22,20 +22,29 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
 
   useEffect(() => {
     const isDataReceived = events.length > 0;
-
+  
     if (isDataReceived) {
-      const filtered = events.filter((event) => {
-        return (
-          event.title.toLowerCase().includes(searchTerm.toLowerCase()) // ||
-          // event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          // event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          // event.country.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-      });
-
+      const filtered = events
+        .filter((event) => {
+          return (
+            event.title.toLowerCase().includes(searchTerm.toLowerCase()) // ||
+            // event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            // event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            // event.country.toLowerCase().includes(searchTerm.toLowerCase())
+          );
+        })
+        .sort((a, b) => {
+          // Explicitly annotate the types
+          const dateA: Date = new Date(a.date);
+          const dateB: Date = new Date(b.date);
+  
+          // Compare and sort in descending order
+          return dateB.getTime() - dateA.getTime();
+        });
+  
       setFilteredEvents(filtered);
     }
-  }, [events, searchTerm, apiKey]);
+  }, [events, searchTerm, apiKey]);  
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setShowSideDrawer(true);
@@ -140,4 +149,4 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   );
 };
 
-export default EventCard;
+export default EventCards;

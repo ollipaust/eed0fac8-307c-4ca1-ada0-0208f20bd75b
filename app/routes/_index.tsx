@@ -1,6 +1,6 @@
 // routes/_index.tsx
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
-import EventCard from "~/ui/components/eventCard";
+import EventCards from "~/ui/components/eventCard";
 import { useSearch } from '~/utils/searchContextProvider'; // Adjust the path
 import { useLoaderData } from "@remix-run/react";
 
@@ -26,7 +26,7 @@ export default function Index() {
 
   return (
     <>
-      <EventCard searchTerm={searchTerm} apiKey={apiKey} />
+      <EventCards searchTerm={searchTerm} apiKey={apiKey} />
     </>
   );
 }
