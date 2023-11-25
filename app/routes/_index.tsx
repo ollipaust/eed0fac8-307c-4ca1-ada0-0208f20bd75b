@@ -16,17 +16,17 @@ export const loader: LoaderFunction = async () => {
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
   return {
-    someData: apiKey,
+    apiKey: apiKey,
   };
 };
 
 export default function Index() {
   const { searchTerm } = useSearch();
-  const { someData } = useLoaderData<{ someData: string }>();
+  const { apiKey } = useLoaderData<{ apiKey: string }>();
 
   return (
     <>
-      <EventCard searchTerm={searchTerm} someData={someData} />
+      <EventCard searchTerm={searchTerm} apiKey={apiKey} />
     </>
   );
 }

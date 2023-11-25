@@ -8,10 +8,10 @@ import TimeFormat from '~/utils/formatTime';
 
 interface EventCardProps {
   searchTerm: string;
-  someData: string;
+  apiKey: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ searchTerm, someData }) => {
+const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   const { events } = useEventContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
@@ -31,7 +31,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, someData }) => {
 
       setFilteredEvents(filtered);
     }
-  }, [events, searchTerm, someData]);
+  }, [events, searchTerm, apiKey]);
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setShowSideDrawer(true);
@@ -101,7 +101,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, someData }) => {
               height="100%"
               frameBorder="0"
               style={{ border: '0' }}
-              src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=${someData}`}
+              src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=${apiKey}`}
               allowFullScreen
             />
             <div className="hidden-drawer"></div>
