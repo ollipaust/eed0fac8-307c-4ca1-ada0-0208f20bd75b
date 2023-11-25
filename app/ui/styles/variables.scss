@@ -6,6 +6,7 @@ $secondary: #007FFF;
 $secondary--dark: #003D7A;
 
 $light: #f0eee9;
+$light--90: rgba($light, 0.9);
 $light--75: rgba($light, 0.75);
 $light--50: rgba($light, 0.5);
 $light--25: rgba($light, 0.25);
@@ -13,6 +14,7 @@ $light--15: rgba($light, 0.15);
 $light--10: rgba($light, 0.1);
 
 $dark: #11151C;
+$dark--90: rgba($dark, 0.9);
 $dark--75: rgba($dark, 0.75);
 $dark--50: rgba($dark, 0.5);
 $dark--25: rgba($dark, 0.25);
@@ -44,7 +46,7 @@ $backdrop-filter-blur-100: blur(1rem);
 
 // Header
 $header-padding: 1rem 2rem 1rem 3rem;
-$header-height: 75px;
+$header-height: 60px;
 $header-max-height: 150px;
 
 // Button
@@ -93,3 +95,17 @@ $breakpoint-small: 576px;
 $breakpoint-medium: 768px;
 $breakpoint-large: 992px;
 $breakpoint-xlarge: 1200px;
+
+// z-Index
+$zIndex--0: 0;
+$zIndex--1: 1;
+$zIndex--2: 10;
+$zIndex--3: 50;
+$zIndex--4: 100;
+$zIndex--5: 500;
+$zIndex--6: 1000;
+$zIndex--7: 5000;
+$zIndex--8: 10000;
+$zIndex--9: 50000;
+$zIndex--10: 100000;
+$zIndex--11: 500000;

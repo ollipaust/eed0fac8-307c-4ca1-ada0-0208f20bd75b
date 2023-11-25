@@ -7,9 +7,9 @@
     justify-content: space-between;
     align-items: center;
     position: fixed;
-    z-index: 100;
+    z-index: $zIndex--4;
     width: 100%;
-    height: auto;
+    height: $header-height;
     background-color: $primary;
     color: $light;
     padding: 0.5rem 2rem;
@@ -51,7 +51,7 @@
         left: 0; 
         top: 50%;
         transform: translateY(-60%);
-        z-index: 1000;
+        z-index: $zIndex--6;
         opacity: 0.33;
     }
 
@@ -73,19 +73,37 @@
 .mainContent {
     position: relative;
     padding: 2rem 4rem;
-    top: 100px;
+    top: 60px;
     min-height: calc(100vh - 200px);
 }
 
 .eventsGrid {
     display: grid;
+    position: relative;
     grid-template-columns: repeat(3, 1fr);
     width: fit-content;
     margin: 0 auto;
+    top: 10rem;
 }
 .eventsResults {
-    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    position: fixed;
+    top: $header-height;
+    left: 50%;
+    width: 100%;
+    height: $header-height;
     margin: 0 auto;
+    transform: translateX(-50%);
+    z-index: $zIndex--1;
+    background-color: $dark--90;
+    border-bottom: $box-border-dark;
+    
+    &__content {
+        color: $light;
+    }
 }
 // event cards
 .box {
@@ -214,29 +232,27 @@
     height: 200px;
     padding: 1rem 2rem;
 }
-// Add your global styles here, if needed
 
-.side-drawer {
+.googleMapsSideDrawer {
     position: fixed;
-    top: 57px;
-    right: -400px; // Start with the side-drawer off-screen
+    z-index: $zIndex--4;
+    top: $header-height;
+    right: -400px;
     bottom: 0;
-    width: 400px; // Adjust the width as needed
+    width: 400px;
     background-color: #fff;
-    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); // Add a subtle box shadow
-    transition: transform 0.3s ease-in-out; // Smooth transition effect
+    box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1); 
+    transition: transform 0.3s ease-in-out; 
   
-    // Optionally, add more styling to enhance the appearance
     display: flex;
     flex-direction: column;
     padding: 20px;
   
-    // Adjust as needed for a close button
-    button {
+    &__button {
       align-self: flex-end;
       margin-top: 10px;
       padding: 8px 12px;
-      background-color: #007bff; // Example button color
+      background-color: #007bff;
       color: #fff;
       border: none;
       cursor: pointer;
@@ -246,32 +262,29 @@
       }
   
       &:hover {
-        background-color: #0056b3; // Example button color on hover
+        background-color: #0056b3; 
       }
     }
   
-    // Add more styling for the content inside the side-drawer, such as iframe
-    iframe {
+    &__iframe {
       width: 100%;
-      height: calc(100% - 40px); // Adjust for padding
+      height: calc(100% - 40px);
       border: none;
     }
   }
   
-  // Optionally, you can add media queries for responsiveness
   @media (max-width: 767px) {
-    .side-drawer {
+    .googleMapsSideDrawer {
       width: 100%;
-      right: -100%; // Start with the side-drawer off-screen on smaller screens
+      right: -100%;
     }
   }
   
-  // Add a class to transition the side-drawer to its visible state
-  .side-drawer {
-    transform: translateX(0); // Slide in the side-drawer
+  .googleMapsSideDrawer {
+    transform: translateX(0);
     transition: transform 0.5s ease-in-out;
     &--visible {
-        transform: translateX(-400px); // Slide in the side-drawer
+        transform: translateX(-400px);
         transition: transform 0.5s ease-in-out;
       }
   }

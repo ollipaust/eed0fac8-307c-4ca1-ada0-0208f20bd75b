@@ -24,10 +24,10 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
     if (isDataReceived) {
       const filtered = events.filter((event) => {
         return (
-          event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-          event.country.toLowerCase().includes(searchTerm.toLowerCase())
+          event.title.toLowerCase().includes(searchTerm.toLowerCase()) // ||
+          // event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          // event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          // event.country.toLowerCase().includes(searchTerm.toLowerCase())
         );
       });
 
@@ -56,7 +56,9 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   return (
     <>
       
-      <div className="eventsResults"><h1>{`Results: ${resultAmount}`}</h1></div>
+      <div className="eventsResults">
+        <span className='eventsResults__content h2'>{`Public Events: ${resultAmount}`}</span>
+      </div>
       <div className="eventsGrid">
         {resultAmount > 0 ? (
           filteredEvents.map((event, index) => (
@@ -98,24 +100,24 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
         ) : null }
       </div>
 
-      <div className={`side-drawer ${showSideDrawer && selectedEvent ? 'side-drawer--visible' : ''}`}>
+      <div className={`googleMapsSideDrawer ${showSideDrawer && selectedEvent ? 'googleMapsSideDrawer--visible' : ''}`}>
         {showSideDrawer && selectedEvent && (
           <>
             <iframe
               title={`Google Maps - ${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`}
+              className='googleMapsSideDrawer__iframe'
               width="100%"
               height="100%"
-              frameBorder="0"
               style={{ border: '0' }}
               src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=${apiKey}`}
               allowFullScreen
             />
-            <div className="hidden-drawer"></div>
+            <div className="googleMapsSideDrawer--hidden"></div>
           </>
         )}
-        <div className="drawer-buttons">
-          <button onClick={closeSideDrawer}>Close</button>
-          <button onClick={openGoogleMapsInNewTab}>Open in Google Maps</button>
+        <div className="googleMapsSideDrawer__buttonsContainer">
+          <button className='googleMapsSideDrawer__button' onClick={closeSideDrawer}>Close</button>
+          <button className='googleMapsSideDrawer__button' onClick={openGoogleMapsInNewTab}>Open in Google Maps</button>
         </div>
       </div>
     </>
