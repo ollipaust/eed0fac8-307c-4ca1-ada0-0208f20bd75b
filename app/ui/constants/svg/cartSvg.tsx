@@ -1,18 +1,18 @@
 import React from "react";
 
-interface SvgIconCartFullProps {
+interface SvgCartIconFullProps {
     svgCartType?: string;
     width?: number;
     height?: number;
 }
 
-interface SvgIconCartPlusProps {
+interface SvgCartIconPlusProps {
     svgCartType?: string;
     width?: number;
     height?: number;
 }
 
-export const SvgIconCartFull: React.FC<SvgIconCartFullProps> = ({svgCartType, width, height}) => (
+export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, width, height}) => (
   <svg
     className={`svgCartIcon svgCartIcon--${svgCartType}`}
     xmlns="http://www.w3.org/2000/svg"
@@ -26,7 +26,7 @@ export const SvgIconCartFull: React.FC<SvgIconCartFullProps> = ({svgCartType, wi
     />
   </svg>
 );
-export const SvgIconCartPlus: React.FC<SvgIconCartPlusProps> = ({svgCartType, width, height}) => (
+export const SvgCartIconPlus: React.FC<SvgCartIconPlusProps> = ({svgCartType, width, height}) => (
     <svg
         className={`svgCartIcon svgCartIcon--${svgCartType}`}
         xmlns="http://www.w3.org/2000/svg"

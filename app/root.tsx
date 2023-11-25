@@ -13,6 +13,7 @@ import Layout from "./ui/components/layout";
 import globalStylesheet from "./ui/styles/global.css"
 // @ts-ignore
 import uiStylesheet from './ui/styles/ui.css';
+import { EventProvider } from "./utils/eventProvider";
 
 export const links: LinksFunction = () => {
   return [
@@ -32,21 +33,23 @@ export const links: LinksFunction = () => {
 };
 export default function App() {
   return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        <Layout>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          <LiveReload />
-        </Layout>
-      </body>
-    </html>
+    <EventProvider>
+      <html lang="en">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <Layout>
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </Layout>
+        </body>
+      </html>
+    </EventProvider>
   );
 }

@@ -1,15 +1,16 @@
-// EventList.tsx
 import React, { useEffect, useState } from 'react';
-import EventSearch from './eventSearch'; // Adjust the path based on your project structure
 import { useEventContext } from '../../utils/eventProvider';
-import { cropTitle } from '~/utils/cropTitle';
-import TimeFormat from '~/utils/formatTime';
-import capitalizeFirstLetter from '~/utils/capitalizeFirstLetter';
+import { capitalizeFirstLetter } from '~/utils/capitalizeFirstLetter';
 import ImageLoader from '~/utils/imageLoader';
-import { SvgIconCartPlus } from '../constants/svg/cartSvg';
-import { SvgIconPin } from '../constants/svg/pinSvg';
+import { SvgCartIconPlus } from '../constants/svg/cartSvg';
+import { SvgPinIcon } from '../constants/svg/pinSvg';
+import TimeFormat from '~/utils/formatTime';
 
-const EventList: React.FC = () => {
+interface EventListProps {
+  searchTerm: string;
+}
+
+const EventList: React.FC<EventListProps> = ({ searchTerm }) => {
   const { events } = useEventContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
 
@@ -17,31 +18,21 @@ const EventList: React.FC = () => {
     const isDataReceived = events.length > 0;
 
     if (isDataReceived) {
-      // Update the filtered events based on the search term
-      setFilteredEvents(events);
+      const filtered = events.filter((event) => {
+        return (
+          event.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
+          event.country.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+      });
+
+      setFilteredEvents(filtered);
     }
-  }, [events]);
-
-  const handleSearch = (term: string) => {
-    // Update the filtered events based on the search term
-    const filtered = events.filter((event) => {
-      // Check for the term in multiple fields
-      return (
-        event.title.toLowerCase().includes(term.toLowerCase()) ||
-        event.venue.name.toLowerCase().includes(term.toLowerCase()) ||
-        event.city.toLowerCase().includes(term.toLowerCase()) ||
-        event.country.toLowerCase().includes(term.toLowerCase())
-        // Add more fields as needed
-      );
-    });
-
-    setFilteredEvents(filtered);
-  };
+  }, [events, searchTerm]);
 
   return (
     <>
-      <EventSearch onSearch={handleSearch} />
-
       <div className="eventsGrid">
         {filteredEvents.map((event, index) => (
           event.flyerFront && (
@@ -49,7 +40,7 @@ const EventList: React.FC = () => {
               <div className='box__head'>
                 <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
                 <div className='svgCartIcon__container'>
-                  <SvgIconCartPlus
+                  <SvgCartIconPlus
                     svgCartType="plus"
                     width={48}
                     height={48}
@@ -57,11 +48,11 @@ const EventList: React.FC = () => {
                 </div>
               </div>
               <div className='box__body'>
-                <p>{cropTitle(event.title)}</p>
+                <p>{event.title}</p>
               </div>
               <div className='box__foot'>
                 <p className='eventLocation'>
-                  <SvgIconPin className="full" width={16} height={16} />
+                  <SvgPinIcon className="full" width={16} height={16} />
                   <strong>{event.venue.name}</strong>
                   {' in ' + capitalizeFirstLetter(event.city) + ', ' + event.country.toUpperCase()}
                 </p>

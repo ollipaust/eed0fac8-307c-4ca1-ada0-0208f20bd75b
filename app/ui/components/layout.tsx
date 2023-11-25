@@ -1,20 +1,20 @@
 import React from 'react';
-import type { ReactNode } from 'react';
-import { EventProvider } from '../../utils/eventProvider';
+import { SearchProvider } from '../../utils/searchContextProvider';
 import Header from './header';
+
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode;
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <EventProvider>
+    <SearchProvider>
       <Header />
       <main className="mainContent">{children}</main>
       <footer id="Footer" className="footer">
         <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
       </footer>
-    </EventProvider>
+    </SearchProvider>
   );
 };
 

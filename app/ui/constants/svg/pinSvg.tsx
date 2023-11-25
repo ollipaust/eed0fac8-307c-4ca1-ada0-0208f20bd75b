@@ -1,12 +1,12 @@
 import React from "react";
 
-interface SvgIconPinProps {
+interface SvgPinIconProps {
     className?: string;
     width?: number;
     height?: number;
 }
 
-export const SvgIconPin: React.FC<SvgIconPinProps> = ({className, width, height}) => (
+export const SvgPinIcon: React.FC<SvgPinIconProps> = ({className, width, height}) => (
   <svg
     className={`svgPinIcon svgPinIcon--${className}`}
     xmlns="http://www.w3.org/2000/svg"
