@@ -68,7 +68,7 @@
   grid-template-columns: repeat(3, 1fr);
   width: fit-content;
   margin: 0 auto;
-  top: 10rem; }
+  top: 60px; }
 
 .eventsResults {
   display: flex;
@@ -231,7 +231,8 @@
 .googleMapsSideDrawer__iframe {
   width: 100%;
   height: calc(100% - 40px);
-  border: none; }
+  border: none;
+  background-color: rgba(17, 21, 28, 0.25); }
 
 @media (max-width: 767px) {
   .googleMapsSideDrawer {

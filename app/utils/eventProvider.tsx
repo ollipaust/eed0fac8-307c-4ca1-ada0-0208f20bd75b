@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
-import type { ReactNode } from 'react';
 
 // Define the context
 type EventContextType = {
@@ -19,11 +18,7 @@ export const useEventContext = () => {
   return context;
 };
 
-// create provider component
-interface EventProviderProps {
-  children: ReactNode;
-}
-export const EventProvider: React.FC<EventProviderProps> = ({ children }) => {
+export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [events, setEvents] = useState<any[]>([]); // maybe adjust type
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useEventContext } from '../../utils/eventProvider';
+import { useShoppingCartContext } from '~/utils/shoppingCartContextProvider';
 import { capitalizeFirstLetter } from '~/utils/capitalizeFirstLetter';
 import ImageLoader from '~/utils/imageLoader';
 import { SvgCartIconPlus } from '../constants/svg/cartSvg';
@@ -13,6 +14,7 @@ interface EventCardProps {
 
 const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   const { events } = useEventContext();
+  const { addToCart } = useShoppingCartContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
@@ -67,12 +69,13 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
                 <div className='box__head'>
                   <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
                   <div className='svgCartIcon__container'>
-                    <SvgCartIconPlus
-                      svgCartType="plus"
-                      width={48}
-                      height={48}
-                    />
-                  </div>
+                  <SvgCartIconPlus
+                    svgCartType="plus"
+                    width={48}
+                    height={48}
+                    onClick={() => addToCart(event)} // Add this line to call addToCart when the SVG is clicked
+                  />
+                </div>
                 </div>
                 <div className='box__body'>
                   <p>{event.title}</p>

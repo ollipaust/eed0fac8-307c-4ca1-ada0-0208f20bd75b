@@ -3,16 +3,19 @@ import React from "react";
 interface SvgCartIconFullProps {
     svgCartType?: string;
     width?: number;
-    height?: number;
+    height?: number;  
+    cartItemCount?: number; // New prop to indicate the number of items in the cart
+
 }
 
 interface SvgCartIconPlusProps {
     svgCartType?: string;
     width?: number;
     height?: number;
+    onClick?: () => void; // Add onClick as an optional prop
 }
 
-export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, width, height}) => (
+export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, width, height, cartItemCount}) => (
   <svg
     className={`svgCartIcon svgCartIcon--${svgCartType}`}
     xmlns="http://www.w3.org/2000/svg"
@@ -24,16 +27,22 @@ export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, wi
       fill="#1C274C"
       d="M2.084 2.751a.75.75 0 0 1 .956-.459l.302.106c.616.217 1.14.401 1.552.603.44.217.819.483 1.103.899.282.412.398.865.452 1.362.024.222.037.468.043.738h10.639c1.684 0 3.201 0 3.645.577.444.577.27 1.447-.076 3.186l-.5 2.425c-.315 1.528-.473 2.293-1.025 2.742-.551.45-1.332.45-2.893.45H10.98c-2.789 0-4.183 0-5.05-.914C5.063 13.552 5 12.582 5 9.64V7.038c0-.74 0-1.235-.041-1.615-.04-.363-.11-.545-.2-.677-.088-.129-.221-.25-.525-.398-.322-.158-.761-.314-1.429-.549l-.261-.091a.75.75 0 0 1-.459-.957ZM7.5 18a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM16.5 18a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3Z"
     />
+     {cartItemCount && cartItemCount > 0 && (
+        <text x="50%" y="50%" fontSize="10" fill="#fff" textAnchor="middle" dominantBaseline="middle">
+          {cartItemCount}
+        </text>
+      )}
   </svg>
 );
-export const SvgCartIconPlus: React.FC<SvgCartIconPlusProps> = ({svgCartType, width, height}) => (
+export const SvgCartIconPlus: React.FC<SvgCartIconPlusProps> = ({svgCartType, width, height, onClick}) => (
     <svg
-        className={`svgCartIcon svgCartIcon--${svgCartType}`}
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 24 24"
-        width={width}
-        height={height}
+      className={`svgCartIcon svgCartIcon--${svgCartType}`}
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 24 24"
+      width={width}
+      height={height}
+      onClick={onClick}
     >
         <path
         fillRule="evenodd"
