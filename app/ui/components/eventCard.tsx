@@ -8,14 +8,14 @@ import TimeFormat from '~/utils/formatTime';
 
 interface EventCardProps {
   searchTerm: string;
+  someData: string;
 }
 
-const EventCard: React.FC<EventCardProps> = ({ searchTerm }) => {
+const EventCard: React.FC<EventCardProps> = ({ searchTerm, someData }) => {
   const { events } = useEventContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null); // Change 'any' to the actual type of your event object
-
   useEffect(() => {
     const isDataReceived = events.length > 0;
 
@@ -31,7 +31,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm }) => {
 
       setFilteredEvents(filtered);
     }
-  }, [events, searchTerm]);
+  }, [events, searchTerm, someData]);
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setShowSideDrawer(true);
@@ -101,7 +101,7 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm }) => {
               height="100%"
               frameBorder="0"
               style={{ border: '0' }}
-              src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=AIzaSyDdq3rfiqsjntrw2YaAt4KozdZr4u5o7uU`}
+              src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(`${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`)}&key=${someData}`}
               allowFullScreen
             />
             <div className="hidden-drawer"></div>
