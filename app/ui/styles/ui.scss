@@ -74,13 +74,17 @@
     position: relative;
     padding: 2rem 4rem;
     top: 100px;
-
+    min-height: calc(100vh - 200px);
 }
 
 .eventsGrid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    width: 900px;
+    width: fit-content;
+    margin: 0 auto;
+}
+.eventsResults {
+    width: fit-content;
     margin: 0 auto;
 }
 // event cards

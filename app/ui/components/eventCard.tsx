@@ -15,7 +15,9 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
   const { events } = useEventContext();
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<any>(null); // Change 'any' to the actual type of your event object
+  const [selectedEvent, setSelectedEvent] = useState<any>(null);
+  const resultAmount = filteredEvents.length;
+
   useEffect(() => {
     const isDataReceived = events.length > 0;
 
@@ -53,43 +55,47 @@ const EventCard: React.FC<EventCardProps> = ({ searchTerm, apiKey }) => {
 
   return (
     <>
+      
+      <div className="eventsResults"><h1>{`Results: ${resultAmount}`}</h1></div>
       <div className="eventsGrid">
-        {filteredEvents.map((event, index) => (
-          event.flyerFront && (
-            <div key={event._id} className={`box box__${index}`}>
-              <div className='box__head'>
-                <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
-                <div className='svgCartIcon__container'>
-                  <SvgCartIconPlus
-                    svgCartType="plus"
-                    width={48}
-                    height={48}
-                  />
+        {resultAmount > 0 ? (
+          filteredEvents.map((event, index) => (
+            event.flyerFront && (
+              <div key={event._id} className={`box box__${index}`}>
+                <div className='box__head'>
+                  <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
+                  <div className='svgCartIcon__container'>
+                    <SvgCartIconPlus
+                      svgCartType="plus"
+                      width={48}
+                      height={48}
+                    />
+                  </div>
+                </div>
+                <div className='box__body'>
+                  <p>{event.title}</p>
+                </div>
+                <div className='box__foot'>
+                  <p className='eventLocation'>
+                    <SvgPinIcon className="full" width={16} height={16} />
+                    <strong>
+                      <a
+                        onClick={() => handleGoogleMapsLinkClick(event)}
+                        className={`eventLocation__direction ${showSideDrawer && selectedEvent === event ? 'active' : ''}`}
+                      >
+                        {event.venue.name}
+                      </a>
+                    </strong>
+                    {' in ' + capitalizeFirstLetter(event.city) + ', ' + event.country.toUpperCase()}
+                  </p>
+                  <p className='eventDate'>
+                    <TimeFormat startTime={event.startTime} endTime={event.endTime} fallBackTime={event.date} />
+                  </p>
                 </div>
               </div>
-              <div className='box__body'>
-                <p>{event.title}</p>
-              </div>
-              <div className='box__foot'>
-                <p className='eventLocation'>
-                  <SvgPinIcon className="full" width={16} height={16} />
-                  <strong>
-                    <a
-                      onClick={() => handleGoogleMapsLinkClick(event)}
-                      className={`eventLocation__direction ${showSideDrawer && selectedEvent === event ? 'active' : ''}`}
-                    >
-                      {event.venue.name}
-                    </a>
-                  </strong>
-                  {' in ' + capitalizeFirstLetter(event.city) + ', ' + event.country.toUpperCase()}
-                </p>
-                <p className='eventDate'>
-                  <TimeFormat startTime={event.startTime} endTime={event.endTime} fallBackTime={event.date} />
-                </p>
-              </div>
-            </div>
-          )
-        ))}
+            )
+          ))
+        ) : null }
       </div>
 
       <div className={`side-drawer ${showSideDrawer && selectedEvent ? 'side-drawer--visible' : ''}`}>
