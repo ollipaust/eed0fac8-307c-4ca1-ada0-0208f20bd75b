@@ -1,25 +1,26 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SvgCartIconFull } from '../../constants/svg/cartSvg';
 import { useShoppingCartContext } from '~/utils/appContextProvider';
+import TimeFormat from '~/utils/formatDateAndTime';
 
 const ShopCartHandler: React.FC = () => {
   const { cart, removeFromCart } = useShoppingCartContext();
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
-  const maxTitleLength = 40;
+  const maxTitleLength = 35;
 
   const handleClick = () => {
     setIsActive(!isActive);
+  };
+
+  const handlePayNowClick = () => {
+    window.location.href = '/';
   };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
       setIsActive(false);
     }
-  };
-  
-  const handlePayNowClick = () => {
-    window.location.href = '/';
   };
 
   useEffect(() => {
@@ -35,6 +36,7 @@ const ShopCartHandler: React.FC = () => {
   const cropTitle = (title: string, maxLength: number) => {
     return title.length > maxLength ? `${title.substring(0, maxLength - 3)}...` : title;
   };
+
   return (
     <div className="shopCart__container" ref={containerRef}>
       <button className="shopCart__handler" onClick={handleClick}>
@@ -48,18 +50,23 @@ const ShopCartHandler: React.FC = () => {
               <ul className='shopCart__itemsList'>
                 {cart.map((item) => (
                   <li className='shopCart__item' key={item._id}>
-                    <span className='dark50'>
+                    <p className='dark'>
                       {cropTitle(item.title, maxTitleLength)}
-                    </span>
+                    </p>
                     <button className="shopCart__removeButton" onClick={() => removeFromCart(item)}>
                       X
                     </button>
+                    <p className='dark50 smallText'>
+                      <TimeFormat startTime={item.startTime} endTime={item.endTime} fallBackTime={item.date} />
+                    </p>
                   </li>
                 ))}
               </ul>
+              <div className='hr' />
               <button className="shopCart__payNowButton btn" onClick={handlePayNowClick}>
                 Pay Now
-              </button>            </>
+              </button>
+            </>
           ) : (
             <p className='shopCart__item--empty dark75'>Nothing here, please buy something.</p>
           )}

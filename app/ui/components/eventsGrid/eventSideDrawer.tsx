@@ -29,10 +29,10 @@ const EventSideDrawer: React.FC<{
       )}
       {isVisible && (
         <div className="googleMapsSideDrawer__buttonsContainer">
-          <button className="googleMapsSideDrawer__button" onClick={closeSideDrawer}>
+          <button className="googleMapsSideDrawer__button btn" onClick={closeSideDrawer}>
             Close
           </button>
-          <button className="googleMapsSideDrawer__button" onClick={openGoogleMapsInNewTab}>
+          <button className="googleMapsSideDrawer__button btn" onClick={openGoogleMapsInNewTab}>
             Open in Google Maps
           </button>
         </div>

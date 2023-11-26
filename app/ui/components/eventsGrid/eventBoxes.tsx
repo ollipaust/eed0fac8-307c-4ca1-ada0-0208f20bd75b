@@ -1,4 +1,3 @@
-// eventBoxes.tsx
 import React from 'react';
 import ImageLoader from '~/utils/imageLoader';
 import { SvgCartIconPlus } from '../../constants/svg/cartSvg';
@@ -13,7 +12,9 @@ const EventBoxes: React.FC<{
   selectedEvent: any;
   handleCartIconClick: (event: any, title: string) => void;
   handleGoogleMapsLinkClick: (event: any) => void;
-}> = React.memo(({ event, index, showSideDrawer, selectedEvent, handleCartIconClick, handleGoogleMapsLinkClick }) => {
+}> = React.memo(({ event, index, showSideDrawer, selectedEvent, handleGoogleMapsLinkClick }) => {
+  const { addToCart } = useShoppingCartContext();
+
   return (
     <div
       id={`EventsCardBox__${index}`}
@@ -27,9 +28,7 @@ const EventBoxes: React.FC<{
             svgCartType={'plus'}
             width={48}
             height={48}
-            onClick={() => setTimeout(() => {
-              handleCartIconClick(event, event.title)
-            }, 300)}
+            onClick={() => addToCart(event)}
           />
         </div>
       </div>

@@ -19,8 +19,8 @@ const Header: React.FC = ({ props }: any) => {
           <span>Vennew</span>
         </a>
       </div>
-      <div>
-        <div className="searchContainer">
+      <div id="Search" className="eventSearch" >
+        <div className="searchInput__container">
           <SvgSearchIcon width={32} height={32} />
           <input
             className="eventSearchInput"

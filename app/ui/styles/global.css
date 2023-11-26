@@ -90,10 +90,22 @@ p.dark75, span.dark75 {
   color: rgba(17, 21, 28, 0.5); }
 
 .btn {
-  align-self: flex-end;
   margin-top: 10px;
   padding: 8px 12px;
   background-color: #125398;
   color: #fff;
   border: none;
-  cursor: pointer; }
+  cursor: pointer;
+  border-radius: 0.5rem; }
+
+.smallText {
+  font-size: 0.66rem;
+  margin-top: 0.66rem; }
+
+.hr {
+  background: rgba(17, 21, 28, 0.25);
+  height: 1px;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  border: none;
+  outline: none; }

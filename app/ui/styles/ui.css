@@ -22,11 +22,17 @@
 .header .logo > a:hover {
   color: #f0eee9; }
 
-.header .searchContainer {
+.header .eventSearch {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); }
+
+.header .searchInput__container {
   position: relative; }
 
 .header .eventSearchInput {
-  width: 500px;
+  width: 30vw;
   padding: 0.25rem;
   border: 2px solid #ccc;
   border-radius: 0.5rem;
@@ -268,6 +274,8 @@
   transition: transform 0.5s ease-in-out; }
 
 .shopCart {
+  display: flex;
+  flex-direction: column;
   position: absolute;
   top: 5rem;
   right: 5rem;
@@ -275,16 +283,19 @@
   height: auto;
   background-color: #fff;
   box-shadow: 0px 3px 5px #080A0D;
+  border-radius: 0.5rem;
   padding: 1rem; }
 
 .shopCart--inactive, .shopCart--active {
-  transition: opacity 0.5s ease; }
+  transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
 .shopCart--inactive {
-  opacity: 0; }
+  opacity: 0;
+  transform: translateY(-50%); }
 
 .shopCart--active {
-  opacity: 1; }
+  opacity: 1;
+  transform: translateY(0); }
 
 .shopCart__container {
   position: relative; }
@@ -294,14 +305,23 @@
   padding-left: 0; }
 
 .shopCart__item {
-  font-size: 0.85rem;
-  white-space: nowrap;
-  margin-bottom: 0.5rem;
-  padding-bottom: 0.25rem;
-  border-bottom: 1px solid rgba(17, 21, 28, 0.5); }
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-self: center;
+  width: 100%;
+  font-size: .85rem;
+  padding: 0.5rem; }
 
 .shopCart__item--empty {
   font-size: 0.85rem; }
+
+.shopCart__item > p {
+  margin: 0; }
+
+.shopCart__item:nth-child(odd) {
+  background-color: rgba(17, 21, 28, 0.05); }
 
 .shopCart__handler {
   position: relative;
@@ -328,12 +348,15 @@
   transform: translate(-5%, 12.5%); }
 
 .shopCart__removeButton {
-  color: #ff5c5c;
+  position: absolute;
+  right: 0;
+  color: rgba(17, 21, 28, 0.5);
   border: none;
   padding: 0;
-  background-color: none;
+  background-color: transparent;
   cursor: pointer;
-  transform: translateX(1rem); }
+  align-self: flex-end;
+  transform: translateX(-0.5rem); }
 
 .shopCart__removeButton:hover {
   color: rgba(17, 21, 28, 0.25); }

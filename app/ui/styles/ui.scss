@@ -28,12 +28,19 @@
         }
     }
 
-    .searchContainer {
+    .eventSearch {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    .searchInput__container {
         position: relative;
       }
       
     .eventSearchInput {
-        width: 500px;
+        width: $searchBar-width;
         padding: 0.25rem;
         border: 2px solid #ccc;
         border-radius: $box-radius-1;
@@ -314,6 +321,8 @@
       }
   }
   .shopCart {
+    display: flex;
+    flex-direction: column;
     position: absolute;
     top: 5rem;
     right: 5rem;
@@ -321,19 +330,22 @@
     height: auto;
     background-color: #fff;
     box-shadow: $box-shadow-effect;
+    border-radius: $box-radius-1;
     padding: 1rem;
 
     &--inactive,
     &--active {
-      transition: opacity 0.5s ease;
+        transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     }
   
     &--inactive {
       opacity: 0;
+      transform: translateY(-50%);
     }
   
     &--active {
       opacity: 1;
+      transform: translateY(0);
     }
 
     &__container {
@@ -345,13 +357,25 @@
         padding-left: 0;
     }
     &__item {
-        font-size: 0.85rem;
-        white-space: nowrap;
-        margin-bottom: 0.5rem;
-        padding-bottom: 0.25rem;
-        border-bottom: $box-border-dark2;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-self: center;
+        width: 100%;
+        font-size: .85rem;
+        padding: 0.5rem;
+        
         &--empty {
             font-size: 0.85rem;
+        }
+        
+        > p {
+            margin: 0;
+        }
+
+        &:nth-child(odd) {
+            background-color: $dark--5;
         }
     }
     &__handler {
@@ -379,15 +403,15 @@
         }
     }
     &__removeButton {
-        // Custom styles for the remove button
-        color: #ff5c5c;
+        position: absolute;
+        right: 0;
+        color: $dark--50;
         border: none;
-
         padding: 0;
-        background-color: none;
+        background-color: transparent;
         cursor: pointer;
-        transform: translateX(1rem);
-    
+        align-self: flex-end;
+        transform: translateX(-0.5rem);
         &:hover {
             color: $dark--25;
         }
