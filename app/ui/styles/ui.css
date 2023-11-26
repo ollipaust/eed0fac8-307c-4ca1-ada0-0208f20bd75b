@@ -93,11 +93,16 @@
   margin: 0 auto; }
 
 .eventsGrid .eventDateSeparator {
-  grid-column: span 3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: sticky;
   top: 60px;
   background-color: #f0eee9;
-  z-index: 1; }
+  z-index: 1;
+  width: 100%;
+  height: 60px;
+  grid-column: span 3; }
 
 .eventsGrid .eventDateSeparator > span {
   display: block;
@@ -280,3 +285,47 @@
 .googleMapsSideDrawer--visible {
   transform: translateX(-350px);
   transition: transform 0.5s ease-in-out; }
+
+.shopCart {
+  position: relative; }
+
+.shopCart__handler {
+  position: relative;
+  background-color: transparent;
+  border: none; }
+
+.shopCart__handler .cartCounter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: -50%;
+  right: 0;
+  color: #f0eee9;
+  background-color: red;
+  border-radius: 50%;
+  width: 0.85rem;
+  height: 0.85rem;
+  font-size: .625rem;
+  pointer-events: none;
+  transform: translateY(50%); }
+
+.shopCart__handler .cartCounter > span {
+  transform: translate(-5%, 12.5%); }
+
+.rectangle {
+  position: absolute;
+  top: 5rem;
+  right: 5rem;
+  width: 300px;
+  height: 100px;
+  background-color: #fff; }
+
+.rectangle--inactive, .rectangle--active {
+  transition: opacity 0.5s ease; }
+
+.rectangle--inactive {
+  opacity: 0; }
+
+.rectangle--active {
+  opacity: 1; }
