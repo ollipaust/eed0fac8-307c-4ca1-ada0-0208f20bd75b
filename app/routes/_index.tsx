@@ -1,6 +1,6 @@
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
-import EventCards from "~/ui/components/eventCards";
-import { useSearch } from '~/utils/searchContextProvider';
+import EventGridComponent from "~/ui/components/eventsGrid";
+import { useSearch } from '~/utils/appContextProvider';
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
@@ -24,7 +24,7 @@ export default function Index() {
 
   return (
     <>
-      <EventCards searchTerm={searchTerm} apiKey={apiKey} />
+      <EventGridComponent searchTerm={searchTerm} apiKey={apiKey} />
     </>
   );
 }

@@ -13,7 +13,7 @@ import Layout from "./ui/components/layout";
 import globalStylesheet from "./ui/styles/global.css"
 // @ts-ignore
 import uiStylesheet from './ui/styles/ui.css';
-import { EventProvider } from "./utils/eventProvider";
+import { AppContextProvider } from "./utils/appContextProvider";
 
 export const links: LinksFunction = () => {
   return [
@@ -37,7 +37,7 @@ export const links: LinksFunction = () => {
 };
 export default function App() {
   return (
-    <EventProvider>
+    <AppContextProvider>
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
@@ -54,6 +54,6 @@ export default function App() {
           </Layout>
         </body>
       </html>
-    </EventProvider>
+    </AppContextProvider>
   );
 }

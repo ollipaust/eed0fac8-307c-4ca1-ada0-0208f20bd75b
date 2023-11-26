@@ -1,19 +1,18 @@
-//eventCards.tsx
 import React, { useEffect, useState } from 'react';
-import { useEventContext } from '../../utils/eventProvider';
-import { useShoppingCartContext } from '~/utils/shoppingCartContextProvider';
+import { useEventContext, useShoppingCartContext, useSearch } from '~/utils/appContextProvider';
 import { formatDisplayDate, formatRawDate } from '~/utils/formatDateAndTime';
 import EventBoxes from './eventBoxes';
 import EventSideDrawer from './eventSideDrawer';
 
-interface EventCardsProps {
+interface EventGridComponentProps {
   searchTerm: string;
   apiKey: string;
 }
 
-const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
+const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
   const { eventsByDate, loading, error } = useEventContext();
   const { addToCart, removeFromCart, cart } = useShoppingCartContext();
+  const { searchTerm } = useSearch();
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
@@ -34,13 +33,18 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
         .sort((a, b) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
           const dateB: Date = new Date(formatRawDate(b.startTime));
-
+  
           return dateB.getTime() - dateA.getTime();
         });
-
-      setFilteredEvents(initialEventsList);
+  
+      // Filter out events that are in the cart
+      const filteredEventsNotInCart = initialEventsList.filter((event) => {
+        return !cart.some((item) => item._id === event._id);
+      });
+  
+      setFilteredEvents(filteredEventsNotInCart);
     }
-  }, [eventsByDate, loading, error, searchTerm, apiKey]);
+  }, [eventsByDate, loading, error, searchTerm, apiKey, cart]);
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setShowSideDrawer(true);
@@ -87,15 +91,16 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
   
     return (
       <div id={`Seperator__${id.toString()}`} className="eventDateSeparator">
-        <span>{`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span></span>
+        <span>{`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span>:</span>
       </div>
     );
   };
   
-     return (
+   
+  return (
     <>
       <div className="eventsResults">
-        <span className='eventsResults__content'>{`${availableEvents} public events in London, UK.`}</span>
+        <span className="eventsResults__content">{`${availableEvents} public events in London, UK.`}</span>
       </div>
 
       <div className="eventsGrid">
@@ -103,18 +108,16 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
           filteredEvents.map((event, index) => {
             const eventDate = formatRawDate(event.startTime);
 
-            // Check if the date has changed, render separator if needed
             if (currentDate !== eventDate) {
               currentDate = eventDate;
               return (
                 <React.Fragment key={`separator-${index}`}>
                   <EventDateSeparator id={index} date={currentDate} />
-                  {/* Render the event after the separator */}
                   <EventBoxes
+                    key={event._id}
                     event={event}
                     index={index}
-                    cart={cart}
-                    handleCartIconClick={handleCartIconClick}
+                    handleCartIconClick={handleCartIconClick} 
                     handleGoogleMapsLinkClick={handleGoogleMapsLinkClick}
                     showSideDrawer={showSideDrawer}
                     selectedEvent={selectedEvent}
@@ -122,14 +125,11 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
                 </React.Fragment>
               );
             }
-
-            // Render the event without a separator
             return (
               <EventBoxes
                 key={event._id}
                 event={event}
                 index={index}
-                cart={cart}
                 handleCartIconClick={handleCartIconClick}
                 handleGoogleMapsLinkClick={handleGoogleMapsLinkClick}
                 showSideDrawer={showSideDrawer}
@@ -151,4 +151,4 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
   );
 };
 
-export default EventCards;
+export default EventGridComponent;

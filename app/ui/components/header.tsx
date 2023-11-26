@@ -1,9 +1,8 @@
 // header.tsx
 import React from 'react';
 import { SvgSearchIcon } from '~/ui/constants/svg/searchSvg';
-import { useSearch } from '../../utils/searchContextProvider';
-import { useShoppingCartContext } from '~/utils/shoppingCartContextProvider';
-import ShopCartHandler from './shopCartHandle'; // Adjust the path accordingly
+import { useSearch, useShoppingCartContext } from '../../utils/appContextProvider';
+import ShopCartHandler from './eventsGrid/shopCartHandle';
 
 const Header: React.FC = ({ props }: any) => {
   const { searchTerm, setSearchTerm } = useSearch();

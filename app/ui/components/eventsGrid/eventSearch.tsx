@@ -1,5 +1,5 @@
 import React from 'react';
-import { useSearch } from '../../utils/searchContextProvider';
+import { useSearch } from '~/utils/appContextProvider';
 
 const EventSearch: React.FC = () => {
   const { searchTerm, setSearchTerm } = useSearch();
