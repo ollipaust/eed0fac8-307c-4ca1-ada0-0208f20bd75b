@@ -9,6 +9,12 @@ const ImageLoader: React.FC<ImageLoaderProps> = ({ imageUrl, alt }) => {
   const [imageStatus, setImageStatus] = useState<'loading' | 'success' | 'error'>('loading');
 
   useEffect(() => {
+    if (!imageUrl) {
+      // Handle the case where imageUrl is null or undefined
+      setImageStatus('error');
+      return;
+    }
+
     const image = new Image();
     image.src = imageUrl;
 

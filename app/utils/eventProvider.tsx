@@ -1,7 +1,8 @@
+//eventProvider.tsx
 import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
 
 type EventContextType = {
-  events: any[]; 
+  eventsByDate: Record<string, any[]>; // New object to store events grouped by date
   loading: boolean;
   error: Error | null;
 };
@@ -17,7 +18,7 @@ export const useEventContext = () => {
 };
 
 export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [events, setEvents] = useState<any[]>([]); 
+  const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
 
@@ -39,9 +40,16 @@ export const EventProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     fetchData();
   }, []);
 
+  // Process the events and group them by date
+  const eventsByDate: Record<string, any[]> = events.reduce((acc, event) => {
+    const date = new Date(event.startTime).toLocaleDateString();
+    acc[date] = [...(acc[date] || []), event];
+    return acc;
+  }, {});
+
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <EventContext.Provider value={{ events, loading, error }}>
+    <Suspense fallback={<div>Loading Data...</div>}>
+      <EventContext.Provider value={{ eventsByDate, loading, error }}>
         {children}
       </EventContext.Provider>
     </Suspense>

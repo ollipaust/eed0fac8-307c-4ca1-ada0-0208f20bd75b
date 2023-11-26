@@ -1,3 +1,21 @@
+export const formatRawDate = (dateString: string | null): string => {
+  if (!dateString) {
+      return 'No date available.';
+  }
+
+  const datePart = dateString.split("T")[0];
+  return datePart;
+};
+
+export const formatDisplayDate = (dateString: string | null): string => {
+  if (!dateString) {
+      return 'No date available.';
+  }
+
+  const [year, month, day] = dateString.split("T")[0].split("-");
+  return `${day}/${month}/${year}`;
+};
+
 export const formatDateAndTime = (date: Date): string => {
   const day = date.getDate().toString().padStart(2, '0');
   const month = (date.getMonth() + 1).toString().padStart(2, '0');
@@ -11,3 +29,30 @@ export const formatDateAndTime = (date: Date): string => {
 
   return `${day}/${month}/${year}, ${hours}:${minutes} ${amPM}`;
 };
+
+interface TimeFormatProps {
+startTime: string;
+endTime: string;
+fallBackTime: string;
+}
+
+const TimeFormat: React.FC<TimeFormatProps> = ({ startTime, endTime, fallBackTime }) => {
+if (!startTime || !endTime) {
+  return 'No date available.';
+}
+
+const startDateTime = new Date(startTime);
+const endDateTime = new Date(endTime);
+
+if (isNaN(startDateTime.getTime()) || isNaN(endDateTime.getTime())) {
+  return formatRawDate(fallBackTime);
+} else {
+  return (
+    <>
+      {formatDateAndTime(startDateTime)} &mdash; {formatDateAndTime(endDateTime)}
+    </>
+  );
+}
+};
+
+export default TimeFormat;

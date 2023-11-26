@@ -87,8 +87,23 @@
     gap: 1rem;
     width: fit-content;
     margin: 0 auto;
-    top: $header-height;
+    top: $header-height; // Assuming $header-height is defined elsewhere in your SCSS
+  
+    .eventDateSeparator {
+      grid-column: span 3; // Adjust the number of columns as needed
+      position: sticky;
+      top: $header-height; // Adjust the top value based on your header height
+      background-color: #fff; // Adjust the background color as needed
+      z-index: 1;
+  
+      span {
+        display: block;
+        padding: 10px;
+        font-weight: bold;
+      }
+    }
 }
+
 .eventsResults {
     display: flex;
     justify-content: center;
@@ -102,13 +117,26 @@
     margin: 0 auto;
     transform: translateX(-50%);
     z-index: $zIndex--1;
-    background-color: $dark--90;
-    border-bottom: $box-border-dark;
     
     &__content {
         color: $light;
     }
 }
+
+.eventDateSeparator {
+    grid-column: span 3; // Adjust the number of columns as needed
+    position: sticky;
+    top: 0;
+    background-color: #fff; // Adjust the background color as needed
+    z-index: 1;
+  
+    span {
+      display: block;
+      padding: 10px;
+      font-weight: bold;
+    }
+  }
+  
 // event cards
 .eventsCardBox {
     display: inline-flex;
