@@ -19,7 +19,7 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
   const [filteredEvents, setFilteredEvents] = useState(events);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any>(null);
-  const availableEvents = filteredEvents.length - cart.length;
+  const availableEvents = Math.max(filteredEvents.length - cart.length, 0);
 
   useEffect(() => {
     const isDataReceived = events.length > 0;
