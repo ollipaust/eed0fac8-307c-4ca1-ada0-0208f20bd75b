@@ -103,4 +103,20 @@ p, span {
   &.dark {
     color: $dark;
   }
+  &.dark50 {
+    color: $dark--50;
+  }
+  &.dark75 {
+    color: $dark--50;
+  }
+}
+
+.btn {
+  align-self: flex-end;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: $primary; // Replace $primary with your actual primary color variable
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }

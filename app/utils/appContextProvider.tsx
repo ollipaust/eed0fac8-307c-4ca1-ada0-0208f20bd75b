@@ -1,4 +1,3 @@
-// appContextProvider.tsx
 import React, { createContext, useContext, useEffect, useState, Suspense } from 'react';
 
 // Event Context
@@ -39,7 +38,7 @@ interface ShoppingCartContextProps {
   cart: any[];
   addToCart: (item: any) => void;
   removeFromCart: (item: any) => void;
-  handleGoogleMapsLinkClick: (event: any) => void; // Add this line
+  handleGoogleMapsLinkClick: (event: any) => void;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextProps | undefined>(undefined);
@@ -54,7 +53,6 @@ export const useShoppingCartContext = () => {
 
 // Combined Context Provider
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Event Provider Logic
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -90,8 +88,6 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   // Search Provider Logic
   const [searchTerm, setSearchTerm] = useState<string>('');
-
-  // ShoppingCart Provider Logic
   const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {

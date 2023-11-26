@@ -3,9 +3,10 @@ import { SvgCartIconFull } from '../../constants/svg/cartSvg';
 import { useShoppingCartContext } from '~/utils/appContextProvider';
 
 const ShopCartHandler: React.FC = () => {
-  const { cart } = useShoppingCartContext();
+  const { cart, removeFromCart } = useShoppingCartContext();
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const maxTitleLength = 40;
 
   const handleClick = () => {
     setIsActive(!isActive);
@@ -16,6 +17,10 @@ const ShopCartHandler: React.FC = () => {
       setIsActive(false);
     }
   };
+  
+  const handlePayNowClick = () => {
+    window.location.href = '/';
+  };
 
   useEffect(() => {
     document.addEventListener('click', handleClickOutside);
@@ -25,26 +30,40 @@ const ShopCartHandler: React.FC = () => {
     };
   }, []);
 
+  const countedItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+
+  const cropTitle = (title: string, maxLength: number) => {
+    return title.length > maxLength ? `${title.substring(0, maxLength - 3)}...` : title;
+  };
   return (
     <div className="shopCart__container" ref={containerRef}>
       <button className="shopCart__handler" onClick={handleClick}>
         <SvgCartIconFull svgCartType="full" width={32} height={32} cartItemCount={cart.length} />
       </button>
-      <div className={`rectangle rectangle--${isActive ? 'active' : 'inactive'}`}>
-        {isActive && (
-          <div className="cartItems">
-            <p className=''>Your Cart</p>
-            {cart.length > 0 ? (
-              <ul>
+      <div className={`shopCart shopCart--${isActive ? 'active' : 'inactive'}`}>
+        <>
+          <p className='dark'><b>Total Items:</b> {countedItems}</p>
+          {cart.length > 0 ? (
+            <>
+              <ul className='shopCart__itemsList'>
                 {cart.map((item) => (
-                  <li key={item._id}>{item.title}</li>
+                  <li className='shopCart__item' key={item._id}>
+                    <span className='dark50'>
+                      {cropTitle(item.title, maxTitleLength)}
+                    </span>
+                    <button className="shopCart__removeButton" onClick={() => removeFromCart(item)}>
+                      X
+                    </button>
+                  </li>
                 ))}
               </ul>
-            ) : (
-              <p>Your cart is empty</p>
-            )}
-          </div>
-        )}
+              <button className="shopCart__payNowButton btn" onClick={handlePayNowClick}>
+                Pay Now
+              </button>            </>
+          ) : (
+            <p className='shopCart__item--empty dark75'>Nothing here, please buy something.</p>
+          )}
+        </>
       </div>
     </div>
   );

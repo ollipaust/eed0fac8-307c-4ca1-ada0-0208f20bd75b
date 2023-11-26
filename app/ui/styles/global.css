@@ -82,3 +82,18 @@ h1, h2, h3, h4, h5, h6,
 
 p.dark, span.dark {
   color: #11151C; }
+
+p.dark50, span.dark50 {
+  color: rgba(17, 21, 28, 0.5); }
+
+p.dark75, span.dark75 {
+  color: rgba(17, 21, 28, 0.5); }
+
+.btn {
+  align-self: flex-end;
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #125398;
+  color: #fff;
+  border: none;
+  cursor: pointer; }

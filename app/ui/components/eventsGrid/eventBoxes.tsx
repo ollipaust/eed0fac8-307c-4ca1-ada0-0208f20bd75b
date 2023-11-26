@@ -27,7 +27,9 @@ const EventBoxes: React.FC<{
             svgCartType={'plus'}
             width={48}
             height={48}
-            onClick={() => handleCartIconClick(event, event.title)}
+            onClick={() => setTimeout(() => {
+              handleCartIconClick(event, event.title)
+            }, 300)}
           />
         </div>
       </div>
