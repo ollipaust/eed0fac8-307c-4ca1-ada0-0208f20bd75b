@@ -4,7 +4,7 @@ node_modules
 /public/build
 /build
 .env
-*.css
+/app/ui/styles/*.css
 
 # Local Netlify folder
 .netlify
