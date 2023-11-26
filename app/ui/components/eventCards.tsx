@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useEventContext } from '../../utils/eventProvider';
 import { useShoppingCartContext } from '~/utils/shoppingCartContextProvider';
-import { formatRawDate } from '~/utils/formatDateAndTime';
+import { formatDisplayDate, formatRawDate } from '~/utils/formatDateAndTime';
 import EventBoxes from './eventBoxes';
 import EventSideDrawer from './eventSideDrawer';
 
@@ -35,7 +35,7 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
           const dateB: Date = new Date(formatRawDate(b.startTime));
 
-          return dateA.getTime() - dateB.getTime();
+          return dateB.getTime() - dateA.getTime();
         });
 
       setFilteredEvents(initialEventsList);
@@ -70,11 +70,28 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
     }
   };
 
-const EventDateSeparator: React.FC<{ date: string }> = ({ date }) => (
-  <div className="eventDateSeparator">
-    <span>{date}</span>
-  </div>
-);
+  const EventDateSeparator: React.FC<{ date: string; id: number }> = ({ date, id }) => {
+    useEffect(() => {
+      const separatorElement = document.getElementById(`${id}`);
+      
+      if (separatorElement) {
+        const hasHideClass = Array.from(separatorElement.children).some(child => child.classList.contains('hide'));
+  
+        if (hasHideClass) {
+          console.log('has hide class')
+        } else {
+          console.log('has NO hide class')
+        }
+      }
+    }, []);
+  
+    return (
+      <div id={`Seperator__${id.toString()}`} className="eventDateSeparator">
+        <span>{`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span></span>
+      </div>
+    );
+  };
+  
      return (
     <>
       <div className="eventsResults">
@@ -91,7 +108,7 @@ const EventDateSeparator: React.FC<{ date: string }> = ({ date }) => (
               currentDate = eventDate;
               return (
                 <React.Fragment key={`separator-${index}`}>
-                  <EventDateSeparator date={currentDate} />
+                  <EventDateSeparator id={index} date={currentDate} />
                   {/* Render the event after the separator */}
                   <EventBoxes
                     event={event}

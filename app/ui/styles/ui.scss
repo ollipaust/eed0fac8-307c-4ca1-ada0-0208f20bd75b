@@ -29,6 +29,25 @@
         }
     }
 
+    .cartCounter {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 0;
+        right: 2rem;
+        background-color: red;
+        border-radius: 50%;
+        width: 0.75rem;
+        height: 0.75rem;
+        font-size: 0.5rem;
+        transform: translate(50%, 0);
+        pointer-events: none;
+        > span {
+            transform: translateY(0.06125rem);
+        }
+    }
+
     .searchContainer {
         position: relative;
       }
@@ -37,7 +56,7 @@
         width: 500px;
         padding: 0.25rem;
         border: 2px solid #ccc;
-        border-radius: 5px;
+        border-radius: $box-radius-1;
         font-size: 16px;
         outline: none;
         transition: border-color 0.3s ease;
@@ -63,6 +82,7 @@
     .navigation {
         .svgCartIcon--full {
             fill: $primary--dark;
+            pointer-events: all;
         }
         > a {
             color: $light;
@@ -75,7 +95,7 @@
 // Content
 .mainContent {
     position: relative;
-    padding: 2rem 4rem;
+    padding: 4rem;
     top: 60px;
     min-height: calc(100vh - 200px);
 }
@@ -87,19 +107,21 @@
     gap: 1rem;
     width: fit-content;
     margin: 0 auto;
-    top: $header-height; // Assuming $header-height is defined elsewhere in your SCSS
   
     .eventDateSeparator {
-      grid-column: span 3; // Adjust the number of columns as needed
+      grid-column: span 3;
       position: sticky;
-      top: $header-height; // Adjust the top value based on your header height
-      background-color: #fff; // Adjust the background color as needed
+      top: $header-height;
+      background-color: $light;
       z-index: 1;
   
-      span {
+      > span {
         display: block;
         padding: 10px;
         font-weight: bold;
+        > span {
+        color: $secondary;
+        }
       }
     }
 }
@@ -109,34 +131,19 @@
     justify-content: center;
     align-items: center;
     flex-direction: row;
-    position: fixed;
-    top: $header-height;
+    position: absolute;
+    top: 0;
     left: 50%;
     width: 100%;
     height: $header-height;
     margin: 0 auto;
     transform: translateX(-50%);
-    z-index: $zIndex--1;
     
     &__content {
         color: $light;
     }
 }
 
-.eventDateSeparator {
-    grid-column: span 3; // Adjust the number of columns as needed
-    position: sticky;
-    top: 0;
-    background-color: #fff; // Adjust the background color as needed
-    z-index: 1;
-  
-    span {
-      display: block;
-      padding: 10px;
-      font-weight: bold;
-    }
-  }
-  
 // event cards
 .eventsCardBox {
     display: inline-flex;
@@ -148,7 +155,7 @@
     height: 450px;
     margin: 0;
     box-shadow: $box-shadow-effect;
-    border-radius: 0.5rem;
+    border-radius: $box-radius-1;
     overflow: hidden;
 
     &__head {
@@ -199,7 +206,7 @@
                 left: 100%;
                 width: 64px;
                 height: 64px;
-                border-radius: 50%;
+                border-radius: $box-radius-circle;
                 opacity: 1;
                 background-color: #f0eee9;
                 transform: translate(-100%, -100%) scale(.6);

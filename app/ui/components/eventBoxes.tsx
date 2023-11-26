@@ -17,6 +17,7 @@ const EventBoxes: React.FC<{
   ({ event, index, cart, handleCartIconClick, handleGoogleMapsLinkClick, showSideDrawer, selectedEvent }) => {
     return (
       <div
+        id={`EventsCardBox__${index}`}
         key={`${event._id}-${cart.some((item) => item._id === event._id)}`}
         className={`eventsCardBox eventsCardBox__${index} ${
           cart.some((item) => item._id === event._id) ? 'hide' : ''

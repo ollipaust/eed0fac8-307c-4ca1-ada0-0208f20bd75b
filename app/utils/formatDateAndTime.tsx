@@ -1,18 +1,17 @@
 export const formatRawDate = (dateString: string | null): string => {
-  if (!dateString) {
-      return 'No date available.';
-  }
-
-  const datePart = dateString.split("T")[0];
-  return datePart;
+  return dateString?.split("T")[0] || 'No date available.';
 };
 
 export const formatDisplayDate = (dateString: string | null): string => {
-  if (!dateString) {
-      return 'No date available.';
+  const formattedDateTime = dateString?.split("T");
+
+  if (!formattedDateTime) {
+    return 'No date available.';
   }
 
-  const [year, month, day] = dateString.split("T")[0].split("-");
+  const datePart = formattedDateTime[0];
+  const [year, month, day] = datePart.split("-"); // Updated this line
+
   return `${day}/${month}/${year}`;
 };
 
