@@ -1,7 +1,6 @@
-// routes/_index.tsx
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
-import EventCards from "~/ui/components/eventCard";
-import { useSearch } from '~/utils/searchContextProvider'; // Adjust the path
+import EventCards from "~/ui/components/eventCards";
+import { useSearch } from '~/utils/searchContextProvider';
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
@@ -12,7 +11,6 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async () => {
-  // Fetch any data you need for your component here
   const apiKey = process.env.GOOGLE_MAPS_API_KEY;
 
   return {

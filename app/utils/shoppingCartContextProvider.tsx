@@ -11,7 +11,7 @@ const ShoppingCartContext = createContext<ShoppingCartContextProps | undefined>(
 export const useShoppingCartContext = () => {
   const context = useContext(ShoppingCartContext);
   if (!context) {
-    throw new Error('useShoppingCartContext must be used within a ShoppingCartProvider');
+    throw new Error('useShoppingCartContext must be used within ShoppingCartProvider');
   }
   return context;
 };
@@ -22,12 +22,17 @@ export const ShoppingCartProvider: React.FC<{ children: React.ReactNode }> = ({ 
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     if (storedCart) {
-      setCart(JSON.parse(storedCart));
+      const { data, timestamp } = JSON.parse(storedCart);
+      const expirationTime = 24 * 60 * 60 * 1000; // 24h in ms
+      if (Date.now() - timestamp <= expirationTime) {
+        setCart(data);
+      }
     }
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('cart', JSON.stringify(cart));
+    const timestamp = Date.now();
+    localStorage.setItem('cart', JSON.stringify({ data: cart, timestamp }));
   }, [cart]);
 
   const addToCart = (item: any) => {

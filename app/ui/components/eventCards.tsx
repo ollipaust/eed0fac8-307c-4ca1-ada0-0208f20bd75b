@@ -6,6 +6,7 @@ import ImageLoader from '~/utils/imageLoader';
 import { SvgCartIconPlus } from '../constants/svg/cartSvg';
 import { SvgPinIcon } from '../constants/svg/pinSvg';
 import TimeFormat from '~/utils/formatTime';
+import { formatDate } from '~/utils/formatDate';
 
 interface EventCardsProps {
   searchTerm: string;
@@ -24,25 +25,20 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
     const isDataReceived = events.length > 0;
   
     if (isDataReceived) {
-      const filtered = events
+      const initialEventsList = events
         .filter((event) => {
           return (
-            event.title.toLowerCase().includes(searchTerm.toLowerCase()) // ||
-            // event.venue.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            // event.city.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            // event.country.toLowerCase().includes(searchTerm.toLowerCase())
+            event.startTime && event.endTime && event.title.toLowerCase().includes(searchTerm.toLowerCase())
           );
         })
         .sort((a, b) => {
-          // Explicitly annotate the types
-          const dateA: Date = new Date(a.date);
-          const dateB: Date = new Date(b.date);
-  
-          // Compare and sort in descending order
-          return dateB.getTime() - dateA.getTime();
+          const dateA: Date = new Date(formatDate(a.startTime));
+          const dateB: Date = new Date(formatDate(b.startTime));
+
+          return dateA.getTime() - dateB.getTime();
         });
   
-      setFilteredEvents(filtered);
+      setFilteredEvents(initialEventsList);
     }
   }, [events, searchTerm, apiKey]);  
 
@@ -77,7 +73,7 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
   return (
     <>
       <div className="eventsResults">
-        <span className='eventsResults__content h2'>{`Public Events: ${availableEvents}`}</span>
+        <span className='eventsResults__content'>{`${availableEvents} public events in London, UK.`}</span>
       </div>
       <div className="eventsGrid">
         {availableEvents > 0 ? (
@@ -85,24 +81,23 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
             event.flyerFront && (
               <div
                 key={event._id}
-                className={`box box__${index}`}
-                style={{ display: cart.some((item) => item._id === event._id) ? 'none' : 'inline-flex' }}
+                className={`eventsCardBox eventsCardBox__${index} ${cart.some((item) => item._id === event._id) ? 'hide' : ''}`}
               >
-                <div className='box__head'>
+                <div className='eventsCardBox__head'>
                   <ImageLoader imageUrl={event.flyerFront} alt="Event Flyer" />
                   <div className='svgCartIcon__container'>
                     <SvgCartIconPlus
-                      svgCartType={cart.some((item) => item._id === event._id) ? 'full' : 'plus'}
+                      svgCartType={'plus'}
                       width={48}
                       height={48}
                       onClick={() => handleCartIconClick(event)}
                     />
                   </div>
                 </div>
-                <div className='box__body'>
+                <div className='eventsCardBox__body'>
                   <p>{event.title}</p>
                 </div>
-                <div className='box__foot'>
+                <div className='eventsCardBox__foot'>
                   <p className='eventLocation'>
                     <SvgPinIcon className="full" width={16} height={16} />
                     <strong>
@@ -113,7 +108,6 @@ const EventCards: React.FC<EventCardsProps> = ({ searchTerm, apiKey }) => {
                         {event.venue.name}
                       </a>
                     </strong>
-                    {' in ' + capitalizeFirstLetter(event.city) + ', ' + event.country.toUpperCase()}
                   </p>
                   <p className='eventDate'>
                     <TimeFormat startTime={event.startTime} endTime={event.endTime} fallBackTime={event.date} />
