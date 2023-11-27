@@ -74,6 +74,12 @@ Ensure that you meet the following software requirements before starting the ins
     npm run start
 ```
 
+**Run both build + serve scripts:**
+
+```sh
+    npm run produce
+```
+
 ## Cheers
 
 Feel free to contact me if you want to talk CODE! :)
