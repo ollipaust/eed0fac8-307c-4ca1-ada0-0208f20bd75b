@@ -8,7 +8,7 @@
 
 https://teclead.ollipaust.dev/
 
-## Project Installation
+## Prerequisites
 
 Ensure that you meet the following software requirements before starting the installation:
 
@@ -38,7 +38,13 @@ Ensure that you meet the following software requirements before starting the ins
 
 ## Development
 
-*Before running dev, make sure you have installed the peer dependencies via NPM!*
+*Before running dev, make sure you have created a .env file installed the peer dependencies via NPM!*
+
+**Create a .env file with the Google Maps API Key Variable:**
+
+```sh
+    GOOGLE_MAPS_API_KEY=YourGoogleMapsApiKey
+```
 
 **Run the app in development mode:**
 
