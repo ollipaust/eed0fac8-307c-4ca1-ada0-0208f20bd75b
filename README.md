@@ -40,7 +40,9 @@ Ensure that you meet the following software requirements before starting the ins
 
 *Before running dev, make sure you have created a .env file installed the peer dependencies via NPM!*
 
-**Create a .env file with the Google Maps API Key Variable:**
+## Environment Variables
+
+**Create a .env file in the project root directory containing the Google Maps API Key Variable:**
 
 ```sh
     GOOGLE_MAPS_API_KEY=YourGoogleMapsApiKey
