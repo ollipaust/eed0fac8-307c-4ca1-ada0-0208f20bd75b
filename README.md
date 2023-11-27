@@ -4,22 +4,52 @@
 
 - The platform is built with [Remix Docs](https://remix.run/docs), TypeScript, SCSS & custom Hooks
 
-## LIVE DEMO (Netlify):
+## LIVE DEMO (CI/CD: Github > Netlify):
 
 https://teclead.ollipaust.dev/
 
+## Project Installation
+
+Ensure that you meet the following software requirements before starting the installation:
+
+- Node.js (Version 18.0.0 or higher)
+- npm (Node Package Manager)
+- git (for working with Git repositories)
+
+## Installation Steps:
+
+**1. Clone the Remix project from GitHub into your local directory:**
+
+
+```sh
+   git clone https://github.com/ollipaust/eed0fac8-307c-4ca1-ada0-0208f20bd75b.git vennew
+```
+
+**2. Change current directory & open VS Code:**
+```sh
+   cd vennew
+   code . (if you use VSCode)
+```
+
+**3. Install peer dependencies:**
+```sh
+   npm install
+```
+
 ## Development
+
+*Before running dev, make sure you have installed the peer dependencies via NPM!*
 
 **Run the app in development mode:**
 
 ```sh
-npm run dev
+    npm run dev
 ```
 
 **Clean up with Prettier:**
 
 ```sh
-npm run format
+    npm run format
 ```
 
 ## Deployment
@@ -27,15 +57,15 @@ npm run format
 **Build the app:**
 
 ```sh
-npm run build
+    npm run build
 ```
 
 **Run the app in production mode:**
 
 ```sh
-npm run start
+    npm run start
 ```
 
-## Cheers:
+## Cheers
 
 Feel free to contact me if you want to talk CODE! :)
