@@ -36,3 +36,6 @@ npm run build
 npm run start
 ```
 
+## LIVE DEMO (Netlify):
+
+Feel free to contact me if you want to talk CODE! :)
