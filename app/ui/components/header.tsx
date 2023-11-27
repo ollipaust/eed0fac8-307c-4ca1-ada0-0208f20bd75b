@@ -1,15 +1,15 @@
-import React from "react"
-import { SvgSearchIcon } from "~/ui/constants/svg/searchSvg"
-import { useSearch, useShoppingCartContext } from "../../utils/appContextProvider"
-import ShopCartHandler from "./eventsGrid/shopCartHandle"
+import React from "react";
+import { SvgSearchIcon } from "~/ui/constants/svg/searchSvg";
+import { useSearch, useShoppingCartContext } from "~/utils/appContextProvider";
+import ShopCartHandler from "~/ui/components/eventsGrid/shopCartHandle";
 
 const Header: React.FC = ({ props }: any) => {
-  const { searchTerm, setSearchTerm } = useSearch()
-  const { cart } = useShoppingCartContext()
+  const { searchTerm, setSearchTerm } = useSearch();
+  const { cart } = useShoppingCartContext();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value)
-  }
+    setSearchTerm(e.target.value);
+  };
 
   return (
     <header id="Header" className="header" {...props}>
@@ -39,7 +39,7 @@ const Header: React.FC = ({ props }: any) => {
         <ShopCartHandler />
       </nav>
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;

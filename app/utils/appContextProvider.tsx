@@ -1,115 +1,115 @@
-import React, { createContext, useContext, useEffect, useState, Suspense } from "react"
+import React, { createContext, useContext, useEffect, useState, Suspense } from "react";
 
 // Event Context
 interface EventContextProps {
-  eventsByDate: Record<string, any[]>
-  loading: boolean
-  error: Error | null
+  eventsByDate: Record<string, any[]>;
+  loading: boolean;
+  error: Error | null;
 }
 
-const EventContext = createContext<EventContextProps | undefined>(undefined)
+const EventContext = createContext<EventContextProps | undefined>(undefined);
 
 export const useEventContext = () => {
-  const context = useContext(EventContext)
+  const context = useContext(EventContext);
   if (!context) {
-    throw new Error("useEventContext must be used within an EventProvider")
+    throw new Error("useEventContext must be used within an EventProvider");
   }
-  return context
-}
+  return context;
+};
 
 // Search Context
 interface SearchContextProps {
-  searchTerm: string
-  setSearchTerm: React.Dispatch<React.SetStateAction<string>>
+  searchTerm: string;
+  setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const SearchContext = createContext<SearchContextProps | undefined>(undefined)
+const SearchContext = createContext<SearchContextProps | undefined>(undefined);
 
 export const useSearch = () => {
-  const context = useContext(SearchContext)
+  const context = useContext(SearchContext);
   if (!context) {
-    throw new Error("useSearch must be used within the SearchProvider")
+    throw new Error("useSearch must be used within the SearchProvider");
   }
-  return context
-}
+  return context;
+};
 
 interface ShoppingCartContextProps {
-  cart: any[]
-  addToCart: (item: any) => void
-  removeFromCart: (item: any) => void
-  maxCartItemsSelected: number
+  cart: any[];
+  addToCart: (item: any) => void;
+  removeFromCart: (item: any) => void;
+  maxCartItemsSelected: number;
 }
 
-const ShoppingCartContext = createContext<ShoppingCartContextProps | undefined>(undefined)
-const maxCartItemsSelected = 10
+const ShoppingCartContext = createContext<ShoppingCartContextProps | undefined>(undefined);
+const maxCartItemsSelected = 10;
 
 export const useShoppingCartContext = () => {
-  const context = useContext(ShoppingCartContext)
+  const context = useContext(ShoppingCartContext);
   if (!context) {
-    throw new Error("useShoppingCartContext must be used within ShoppingCartProvider")
+    throw new Error("useShoppingCartContext must be used within ShoppingCartProvider");
   }
-  return { ...context, maxCartItemsSelected }
-}
+  return { ...context, maxCartItemsSelected };
+};
 
 // Combined Context Provider
 export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [events, setEvents] = useState<any[]>([])
-  const [loading, setLoading] = useState<boolean>(true)
-  const [error, setError] = useState<Error | null>(null)
+  const [events, setEvents] = useState<any[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://teclead-ventures.github.io/data/london-events.json")
-        const data = await response.json()
-        setEvents(data)
+        const response = await fetch("https://teclead-ventures.github.io/data/london-events.json");
+        const data = await response.json();
+        setEvents(data);
       } catch (error) {
         if (error instanceof Error) {
-          setError(error)
+          setError(error);
         }
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchData()
-  }, [])
+    fetchData();
+  }, []);
 
   const eventsByDate: Record<string, any[]> = events.reduce((acc, event) => {
-    const date = new Date(event.startTime).toLocaleDateString()
-    acc[date] = [...(acc[date] || []), event]
-    return acc
-  }, {})
+    const date = new Date(event.startTime).toLocaleDateString();
+    acc[date] = [...(acc[date] || []), event];
+    return acc;
+  }, {});
 
   // Search Provider Logic
-  const [searchTerm, setSearchTerm] = useState<string>("")
-  const [cart, setCart] = useState<any[]>([])
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [cart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart")
+    const storedCart = localStorage.getItem("cart");
     if (storedCart) {
-      const { data, timestamp } = JSON.parse(storedCart)
-      const expirationTime = 24 * 60 * 60 * 1000 // 24h in ms
+      const { data, timestamp } = JSON.parse(storedCart);
+      const expirationTime = 24 * 60 * 60 * 1000; // 24h in ms
       if (Date.now() - timestamp <= expirationTime) {
-        setCart(data)
+        setCart(data);
       }
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
-    const timestamp = Date.now()
-    localStorage.setItem("cart", JSON.stringify({ data: cart, timestamp }))
-  }, [cart])
+    const timestamp = Date.now();
+    localStorage.setItem("cart", JSON.stringify({ data: cart, timestamp }));
+  }, [cart]);
 
   const addToCart = (item: any) => {
     if (!cart.some((cartItem) => cartItem._id === item._id)) {
-      setCart((prevCart) => [...prevCart, item])
+      setCart((prevCart) => [...prevCart, item]);
     }
-  }
+  };
 
   const removeFromCart = (item: any) => {
-    setCart((prevCart) => prevCart.filter((cartItem) => cartItem._id !== item._id))
-  }
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem._id !== item._id));
+  };
 
   return (
     <Suspense fallback={<div>Loading Data...</div>}>
@@ -121,5 +121,5 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
         </SearchContext.Provider>
       </EventContext.Provider>
     </Suspense>
-  )
-}
+  );
+};

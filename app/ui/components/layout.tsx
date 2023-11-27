@@ -1,5 +1,5 @@
-import React from "react"
-import Header from "./header"
+import React from "react";
+import Header from "~/ui/components/header";
 
 const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
@@ -10,7 +10,7 @@ const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
         <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
       </footer>
     </>
-  )
-}
+  );
+};
 
-export default Layout
+export default Layout;

@@ -1,25 +1,25 @@
-import React, { useState, useEffect, useRef } from "react"
-import { SvgCartIconFull } from "../../constants/svg/cartSvg"
-import { useShoppingCartContext } from "~/utils/appContextProvider"
-import TimeFormat from "~/utils/formatDateAndTime"
+import React, { useState, useEffect, useRef } from "react";
+import { SvgCartIconFull } from "~/ui/constants/svg/cartSvg";
+import { useShoppingCartContext } from "~/utils/appContextProvider";
+import TimeFormat from "~/utils/formatDateAndTime";
 
 const ShopCartHandler: React.FC = () => {
-  const { cart, removeFromCart, maxCartItemsSelected } = useShoppingCartContext()
-  const [isActive, setIsActive] = useState(false)
-  const containerRef = useRef<HTMLDivElement | null>(null)
-  const maxTitleLength = 35
+  const { cart, removeFromCart, maxCartItemsSelected } = useShoppingCartContext();
+  const [isActive, setIsActive] = useState(false);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const maxTitleLength = 35;
 
   const handleClick = () => {
-    setIsActive(!isActive)
-  }
+    setIsActive(!isActive);
+  };
 
   const handlePayNowClick = () => {
-    window.location.href = "/"
-  }
+    window.location.href = "/";
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
-    const clickedOnRemoveBtn = (event.target as Element)?.closest("#RemoveItemBtn")
-    const clickedOnPlusIcon = (event.target as Element)?.closest(".SvgCartIconPlus")
+    const clickedOnRemoveBtn = (event.target as Element)?.closest("#RemoveItemBtn");
+    const clickedOnPlusIcon = (event.target as Element)?.closest(".SvgCartIconPlus");
 
     if (
       containerRef.current &&
@@ -27,23 +27,23 @@ const ShopCartHandler: React.FC = () => {
       !clickedOnRemoveBtn &&
       !clickedOnPlusIcon
     ) {
-      setIsActive(false)
+      setIsActive(false);
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside)
+    document.addEventListener("click", handleClickOutside);
 
     return () => {
-      document.removeEventListener("click", handleClickOutside)
-    }
-  }, [])
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
-  const countedItems = cart.reduce((total, item) => total + (item.quantity || 1), 0)
+  const countedItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const cropTitle = (title: string, maxLength: number) => {
-    return title.length > maxLength ? `${title.substring(0, maxLength - 3)}...` : title
-  }
+    return title.length > maxLength ? `${title.substring(0, maxLength - 3)}...` : title;
+  };
 
   return (
     <div className="shopCart__container" ref={containerRef}>
@@ -89,7 +89,7 @@ const ShopCartHandler: React.FC = () => {
         )}
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ShopCartHandler
+export default ShopCartHandler;

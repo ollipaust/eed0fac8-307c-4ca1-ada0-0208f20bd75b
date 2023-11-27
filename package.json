@@ -8,7 +8,7 @@
     "dev": "npm run redirects:disable && concurrently \"npm run dev:css\" \"npm run dev-remix\"",
     "dev-remix": "remix dev --manual",
     "start": "netlify serve",
-    "produce": "npm run build && npm start",
+    "produce": "npm run build && npm run start",
     "typecheck": "tsc -b",
     "build:css": "node-sass ./app/ui/styles -o ./app/ui/styles --output-style compressed",
     "dev:css": "npm run build:css && node-sass -rw ./app/ui/styles -o ./app/ui/styles",
