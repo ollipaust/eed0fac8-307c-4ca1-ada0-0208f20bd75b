@@ -16,7 +16,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
-  const availableEvents = Math.max(filteredEvents.length - cart.length, 0);
+  const availableEvents = Math.max(filteredEvents.length, 0);
   let currentDate: string = '0000-00-00T00:00:00.000';
 
   useEffect(() => {
@@ -33,15 +33,14 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
         .sort((a, b) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
           const dateB: Date = new Date(formatRawDate(b.startTime));
-  
+
           return dateB.getTime() - dateA.getTime();
         });
-  
-      // Filter out events that are in the cart
+
       const filteredEventsNotInCart = initialEventsList.filter((event) => {
         return !cart.some((item) => item._id === event._id);
       });
-  
+
       setFilteredEvents(filteredEventsNotInCart);
     }
   }, [eventsByDate, loading, error, searchTerm, apiKey, cart]);
@@ -53,14 +52,14 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
 
   const handleCartIconClick = (event: any) => {
     const isInCart = cart.some((item) => item._id === event._id);
-
+  
     if (isInCart) {
       removeFromCart(event);
     } else {
       addToCart(event);
     }
   };
-
+  
   const closeSideDrawer = () => {
     setShowSideDrawer(false);
   };
@@ -82,9 +81,9 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
         const hasHideClass = Array.from(separatorElement.children).some(child => child.classList.contains('hide'));
   
         if (hasHideClass) {
-          console.log('has hide class')
+          console.log('has hide class');
         } else {
-          console.log('has NO hide class')
+          console.log('has NO hide class');
         }
       }
     }, []);
@@ -96,7 +95,6 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
     );
   };
   
-   
   return (
     <>
       <div className="eventsResults">
@@ -104,7 +102,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
       </div>
 
       <div className="eventsGrid">
-        {availableEvents > 0 && (
+        {filteredEvents.length > 0 && (
           filteredEvents.map((event, index) => {
             const eventDate = formatRawDate(event.startTime);
 

@@ -4,7 +4,7 @@ import { useShoppingCartContext } from '~/utils/appContextProvider';
 import TimeFormat from '~/utils/formatDateAndTime';
 
 const ShopCartHandler: React.FC = () => {
-  const { cart, removeFromCart } = useShoppingCartContext();
+  const { cart, removeFromCart, maxCartItemsSelected  } = useShoppingCartContext();
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const maxTitleLength = 35;
@@ -18,7 +18,11 @@ const ShopCartHandler: React.FC = () => {
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+    if (
+      containerRef.current &&
+      !containerRef.current.contains(event.target as Node) &&
+      !document?.getElementById('RemoveItemBtn')
+    ) {
       setIsActive(false);
     }
   };
@@ -44,31 +48,35 @@ const ShopCartHandler: React.FC = () => {
       </button>
       <div className={`shopCart shopCart--${isActive ? 'active' : 'inactive'}`}>
         <>
-          <p className='dark'><b>Total Items:</b> {countedItems}</p>
+          <div className='shopCart__header dark'>
+            <b>Total Items in the Cart:&nbsp;</b> 
+            <span>{countedItems}</span>
+            {countedItems < maxCartItemsSelected ? null : <div className='warningText'>Limit of {maxCartItemsSelected} items reached.<br />Please remove items or proceed to Checkout!</div>}
+          </div>
           {cart.length > 0 ? (
             <>
               <ul className='shopCart__itemsList'>
-                {cart.map((item) => (
+                {cart.map((item, index) => (
                   <li className='shopCart__item' key={item._id}>
-                    <p className='dark'>
-                      {cropTitle(item.title, maxTitleLength)}
-                    </p>
-                    <button className="shopCart__removeButton" onClick={() => removeFromCart(item)}>
+                    <div className='dark'>
+                      {`${index + 1}. ${cropTitle(item.title, maxTitleLength)}`}
+                    </div>
+                    <button id="RemoveItemBtn" className="shopCart__removeButton" onClick={() => removeFromCart(item)}>
                       X
                     </button>
-                    <p className='dark50 smallText'>
+                    <div className='dark50 smallText'>
                       <TimeFormat startTime={item.startTime} endTime={item.endTime} fallBackTime={item.date} />
-                    </p>
+                    </div>
                   </li>
                 ))}
               </ul>
               <div className='hr' />
               <button className="shopCart__payNowButton btn" onClick={handlePayNowClick}>
-                Pay Now
+                Checkout
               </button>
             </>
           ) : (
-            <p className='shopCart__item--empty dark75'>Nothing here, please buy something.</p>
+            <div className='shopCart__item--empty dark75'>Nothing here, please buy something.</div>
           )}
         </>
       </div>

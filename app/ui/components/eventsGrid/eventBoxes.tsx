@@ -13,8 +13,8 @@ const EventBoxes: React.FC<{
   handleCartIconClick: (event: any, title: string) => void;
   handleGoogleMapsLinkClick: (event: any) => void;
 }> = React.memo(({ event, index, showSideDrawer, selectedEvent, handleGoogleMapsLinkClick }) => {
-  const { addToCart } = useShoppingCartContext();
-
+  const { addToCart, cart, maxCartItemsSelected} = useShoppingCartContext();
+  const isAddToCartDisabled = cart.length >= maxCartItemsSelected;
   return (
     <div
       id={`EventsCardBox__${index}`}
@@ -28,7 +28,12 @@ const EventBoxes: React.FC<{
             svgCartType={'plus'}
             width={48}
             height={48}
-            onClick={() => addToCart(event)}
+            onClick={() => {
+              if (!isAddToCartDisabled) {
+                addToCart(event);
+              }
+            }}
+            className={isAddToCartDisabled ? 'disabled' : ''}
           />
         </div>
       </div>

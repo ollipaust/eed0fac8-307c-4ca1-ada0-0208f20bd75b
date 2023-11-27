@@ -33,22 +33,22 @@ export const useSearch = () => {
   return context;
 };
 
-// ShoppingCart Context
 interface ShoppingCartContextProps {
   cart: any[];
   addToCart: (item: any) => void;
   removeFromCart: (item: any) => void;
-  handleGoogleMapsLinkClick: (event: any) => void;
+  maxCartItemsSelected: number;
 }
 
 const ShoppingCartContext = createContext<ShoppingCartContextProps | undefined>(undefined);
+const maxCartItemsSelected = 10;
 
 export const useShoppingCartContext = () => {
   const context = useContext(ShoppingCartContext);
   if (!context) {
     throw new Error('useShoppingCartContext must be used within ShoppingCartProvider');
   }
-  return context;
+  return { ...context, maxCartItemsSelected };
 };
 
 // Combined Context Provider
@@ -56,11 +56,6 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
-
-  const handleGoogleMapsLinkClick = (event: any) => {
-    console.log('Handle Google Maps Link Click');
-  };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -107,18 +102,22 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   }, [cart]);
 
   const addToCart = (item: any) => {
-    setCart((prevCart) => [...prevCart, item]);
+    if (!cart.some((cartItem) => cartItem._id === item._id)) {
+      setCart((prevCart) => [...prevCart, item]);
+    }
   };
 
   const removeFromCart = (item: any) => {
-    setCart((prevCart) => prevCart.filter((cartItem) => cartItem !== item));
+    setCart((prevCart) => prevCart.filter((cartItem) => cartItem._id !== item._id));
   };
 
   return (
     <Suspense fallback={<div>Loading Data...</div>}>
       <EventContext.Provider value={{ eventsByDate, loading, error }}>
         <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-          <ShoppingCartContext.Provider value={{ cart, addToCart, removeFromCart, handleGoogleMapsLinkClick }}>
+          <ShoppingCartContext.Provider
+            value={{ cart, addToCart, removeFromCart, maxCartItemsSelected }}
+          >
             {children}
           </ShoppingCartContext.Provider>
         </SearchContext.Provider>

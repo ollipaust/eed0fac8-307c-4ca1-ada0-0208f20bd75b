@@ -27,9 +27,12 @@ const ImageLoader: React.FC<ImageLoaderProps> = ({ imageUrl, alt }) => {
     };
   }, [imageUrl]);
 
+  //TODO: add styling to loading component
+
   return (
     <>
-      {imageStatus === 'loading' && <p>Loading flyer...</p>}
+
+      {imageStatus === 'loading' && <span>Loading flyer...</span>} 
       {imageStatus !== 'loading' && (
         <img
           className="flyerImg"
