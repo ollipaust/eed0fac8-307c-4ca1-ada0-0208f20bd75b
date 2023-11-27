@@ -1,10 +1,9 @@
 @import './variables.scss';
 
-// Header
 .header {
   position: fixed;
-  z-index: $zIndex--4;
-  width: 100%;
+  z-index: $zIndex--6;
+  width: 100vw;
   height: $header-height;
   background-color: $primary;
   color: $light;
@@ -81,47 +80,86 @@
       pointer-events: all;
     }
   }
+
+  // Responsive Styling
+  @media only screen and (max-width: $breakpoint-medium) {
+    padding: 0.5rem 1rem;
+
+    .logo {
+      > a {
+        font-size: 1.8rem;
+      }
+    }
+  }
+
+  @media only screen and (max-width: $breakpoint-small) {
+    .logo {
+      > a {
+        font-size: 1.25rem;
+      }
+    }
+  }
 }
 
 // Content
 .mainContent {
   position: relative;
   padding: 4rem;
-  top: 60px;
+  top: $header-height;
   min-height: calc(100vh - 200px);
+
+    // Responsive styles
+    @media screen and (max-width: $breakpoint-large) {
+        padding: 4rem 0;
+    }
 }
 
 .eventsGrid {
-  display: grid;
-  position: relative;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-  width: fit-content;
-  margin: 0 auto;
-
-  .eventDateSeparator {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: sticky;
-    top: $header-height;
-    background-color: $light;
-    z-index: 1;
-    width: 100%;
-    height: auto;
-    padding: 1rem 0;
-    grid-column: span 3;
-
-    > span {
-      display: block;
-      font-weight: bold;
-
+    display: grid;
+    position: relative;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
+    width: fit-content;
+    margin: 0 auto;
+  
+    .eventDateSeparator {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: sticky;
+      top: $header-height;
+      background-color: $light;
+      z-index: 1;
+      width: 100%;
+      height: auto;
+      padding: 1rem 0;
+      grid-column: span 3;
+  
       > span {
-        color: $secondary;
+        display: block;
+        font-weight: bold;
+  
+        > span {
+          color: $secondary;
+        }
       }
     }
+  
+    // Responsive styles
+    @media screen and (max-width: $breakpoint-large) {
+      grid-template-columns: repeat(1, 1fr);
+  
+      grid-column: span 3;
+      .eventDateSeparator {
+        grid-column: span 1;
+      }
+    }
+  
+    @media screen and (max-width: $breakpoint-medium) {
+      grid-template-columns: repeat(1, 1fr);
+    }
   }
-}
+  
 
 .eventsResults {
   position: absolute;
@@ -350,6 +388,7 @@
   box-shadow: $box-shadow-effect;
   border-radius: $box-radius-1;
   padding: 1rem;
+  z-index: $zIndex--1;
 
   &--inactive,
   &--active {
@@ -365,6 +404,7 @@
   &--active {
     opacity: 1;
     transform: translateY(0);
+    pointer-events: all;
   }
 
   &__header {
@@ -427,7 +467,7 @@
       transform: translateY(50%);
 
       > span {
-        transform: translate(-5%, 12.5%);
+        margin: 0 auto;
       }
     }
   }
