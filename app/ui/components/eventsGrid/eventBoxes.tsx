@@ -1,21 +1,21 @@
-import React from "react"
-import ImageLoader from "~/utils/imageLoader"
-import { SvgCartIconPlus } from "../../constants/svg/cartSvg"
-import { SvgPinIcon } from "../../constants/svg/pinSvg"
-import TimeFormat from "~/utils/formatDateAndTime"
-import { useShoppingCartContext } from "~/utils/appContextProvider"
+import React from "react";
+import ImageLoader from "~/utils/imageLoader";
+import { SvgCartIconPlus } from "../../constants/svg/cartSvg";
+import { SvgPinIcon } from "../../constants/svg/pinSvg";
+import TimeFormat from "~/utils/formatDateAndTime";
+import { useShoppingCartContext } from "~/utils/appContextProvider";
 
 const EventBoxes: React.FC<{
-  event: any
-  index: number
-  showSideDrawer: boolean
-  selectedEvent: any
-  handleCartIconClick: (event: any, title: string) => void
-  handleGoogleMapsLinkClick: (event: any) => void
+  event: any;
+  index: number;
+  selectedEvent: any | null;
+  handleCartIconClick: (event: any, title: string) => void;
+  openGoogleMapsInNewTab: (event: any) => void;
 }> = React.memo(
-  ({ event, index, showSideDrawer, selectedEvent, handleGoogleMapsLinkClick }) => {
-    const { addToCart, cart, maxCartItemsSelected } = useShoppingCartContext()
-    const isAddToCartDisabled = cart.length >= maxCartItemsSelected
+  ({ event, index, selectedEvent, handleCartIconClick, openGoogleMapsInNewTab }) => {
+    const { addToCart, cart, maxCartItemsSelected } = useShoppingCartContext();
+    const isAddToCartDisabled = cart.length >= maxCartItemsSelected;
+
     return (
       <div id={`EventsCardBox__${index}`} key={`${event._id}`} className={`eventsCardBox eventsCardBox__${index}`}>
         <div className="eventsCardBox__head">
@@ -27,7 +27,7 @@ const EventBoxes: React.FC<{
               height={48}
               onClick={() => {
                 if (!isAddToCartDisabled) {
-                  addToCart(event)
+                  addToCart(event);
                 }
               }}
               className={isAddToCartDisabled ? "disabled" : ""}
@@ -42,10 +42,9 @@ const EventBoxes: React.FC<{
             <SvgPinIcon className="full" width={16} height={16} />
             <strong>
               <a
-                onClick={(event) => handleGoogleMapsLinkClick(event)}
-                className={`eventLocation__venue--${showSideDrawer && selectedEvent === event ? "active" : ""}`}
-                href="#"
-                role="link"
+                className={`eventLocation__venue--${selectedEvent === event ? "active" : ""}`}
+                onClick={() => openGoogleMapsInNewTab(event)}
+                role="button"
                 tabIndex={0}
                 aria-label={`View location details for ${event.venue.name}`}
               >
@@ -58,11 +57,11 @@ const EventBoxes: React.FC<{
           </p>
         </div>
       </div>
-    )
+    );
   },
   (prevProps, nextProps) => {
-    return prevProps.event === nextProps.event
+    return prevProps.event === nextProps.event;
   }
-)
+);
 
-export default EventBoxes
+export default EventBoxes;

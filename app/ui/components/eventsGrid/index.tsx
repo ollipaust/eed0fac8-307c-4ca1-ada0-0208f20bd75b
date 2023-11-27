@@ -42,9 +42,9 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
   }, [eventsByDate, loading, error, searchTerm, apiKey, cart])
 
   const handleGoogleMapsLinkClick = (event: any) => {
-    setShowSideDrawer(true)
-    setSelectedEvent(event)
-  }
+    setSelectedEvent(event);
+    setShowSideDrawer(true);
+  };
 
   const handleCartIconClick = (event: any) => {
     const isInCart = cart.some((item) => item._id === event._id)
@@ -111,15 +111,14 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
               return (
                 <React.Fragment key={`separator-${index}`}>
                   <EventDateSeparator id={index} date={currentDate} />
-                  <EventBoxes
-                    key={event._id}
-                    event={event}
-                    index={index}
-                    handleCartIconClick={handleCartIconClick}
-                    handleGoogleMapsLinkClick={handleGoogleMapsLinkClick}
-                    showSideDrawer={showSideDrawer}
-                    selectedEvent={selectedEvent}
-                  />
+                    <EventBoxes
+                      key={event._id}
+                      event={event}
+                      index={index}
+                      handleCartIconClick={handleCartIconClick}
+                      openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
+                      selectedEvent={selectedEvent}
+                    />
                 </React.Fragment>
               )
             }
@@ -129,8 +128,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
                 event={event}
                 index={index}
                 handleCartIconClick={handleCartIconClick}
-                handleGoogleMapsLinkClick={handleGoogleMapsLinkClick}
-                showSideDrawer={showSideDrawer}
+                openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
                 selectedEvent={selectedEvent}
               />
             )
