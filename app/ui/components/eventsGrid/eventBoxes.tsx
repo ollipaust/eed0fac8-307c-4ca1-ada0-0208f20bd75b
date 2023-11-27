@@ -1,20 +1,20 @@
-import React from "react";
-import ImageLoader from "~/utils/imageLoader";
-import { SvgCartIconPlus } from "../../constants/svg/cartSvg";
-import { SvgPinIcon } from "../../constants/svg/pinSvg";
-import TimeFormat from "~/utils/formatDateAndTime";
-import { useShoppingCartContext } from "~/utils/appContextProvider";
+import React from "react"
+import ImageLoader from "~/utils/imageLoader"
+import { SvgCartIconPlus } from "../../constants/svg/cartSvg"
+import { SvgPinIcon } from "../../constants/svg/pinSvg"
+import TimeFormat from "~/utils/formatDateAndTime"
+import { useShoppingCartContext } from "~/utils/appContextProvider"
 
 const EventBoxes: React.FC<{
-  event: any;
-  index: number;
-  selectedEvent: any | null;
-  handleCartIconClick: (event: any, title: string) => void;
-  openGoogleMapsInNewTab: (event: any) => void;
+  event: any
+  index: number
+  selectedEvent: any | null
+  handleCartIconClick: (event: any, title: string) => void
+  openGoogleMapsInNewTab: (event: any) => void
 }> = React.memo(
   ({ event, index, selectedEvent, handleCartIconClick, openGoogleMapsInNewTab }) => {
-    const { addToCart, cart, maxCartItemsSelected } = useShoppingCartContext();
-    const isAddToCartDisabled = cart.length >= maxCartItemsSelected;
+    const { addToCart, cart, maxCartItemsSelected } = useShoppingCartContext()
+    const isAddToCartDisabled = cart.length >= maxCartItemsSelected
 
     return (
       <div id={`EventsCardBox__${index}`} key={`${event._id}`} className={`eventsCardBox eventsCardBox__${index}`}>
@@ -27,7 +27,7 @@ const EventBoxes: React.FC<{
               height={48}
               onClick={() => {
                 if (!isAddToCartDisabled) {
-                  addToCart(event);
+                  addToCart(event)
                 }
               }}
               className={isAddToCartDisabled ? "disabled" : ""}
@@ -57,11 +57,11 @@ const EventBoxes: React.FC<{
           </p>
         </div>
       </div>
-    );
+    )
   },
   (prevProps, nextProps) => {
-    return prevProps.event === nextProps.event;
+    return prevProps.event === nextProps.event
   }
-);
+)
 
-export default EventBoxes;
+export default EventBoxes
