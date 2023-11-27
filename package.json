@@ -13,7 +13,8 @@
     "build:css": "node-sass ./app/ui/styles -o ./app/ui/styles --output-style compressed",
     "dev:css": "npm run build:css && node-sass -rw ./app/ui/styles -o ./app/ui/styles",
     "redirects:enable": "shx cp .redirects public/_redirects",
-    "redirects:disable": "shx rm -f public/_redirects"
+    "redirects:disable": "shx rm -f public/_redirects",
+    "format": "prettier --write ."
   },
   "dependencies": {
     "@netlify/functions": "^2.0.0",

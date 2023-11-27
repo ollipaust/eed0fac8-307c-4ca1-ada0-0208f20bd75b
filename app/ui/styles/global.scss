@@ -1,7 +1,7 @@
-@import url('https://fonts.googleapis.com/css?family=Satisfy&display=swap');
-@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
-@import './variables.scss';
-@import './animations.scss';
+@import url("https://fonts.googleapis.com/css?family=Satisfy&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import "./variables.scss";
+@import "./animations.scss";
 
 // Global Styles
 *,
@@ -18,12 +18,12 @@
 :root,
 html,
 body {
-    position: relative;
+  position: relative;
   margin: 0;
   padding: 0;
-  background: $bg-primary; 
-  font-family: $font-family; 
-  color: $text-color; 
+  background: $bg-primary;
+  font-family: $font-family;
+  color: $text-color;
   font-size: $font-size;
 }
 
@@ -36,8 +36,18 @@ a {
     color: $link-hover-color;
   }
 }
-h1, h2, h3, h4, h5, h6,
-.h1, .h2, .h3, .h4, .h5, .h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
   font-family: $font-family-alt;
 }
 

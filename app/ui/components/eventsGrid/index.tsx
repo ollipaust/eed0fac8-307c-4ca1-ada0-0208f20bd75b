@@ -1,100 +1,100 @@
-import React, { useEffect, useState } from 'react';
-import { useEventContext, useShoppingCartContext, useSearch } from '~/utils/appContextProvider';
-import { formatDisplayDate, formatRawDate } from '~/utils/formatDateAndTime';
-import EventBoxes from './eventBoxes';
-import EventSideDrawer from './eventSideDrawer';
+import React, { useEffect, useState } from "react"
+import { useEventContext, useShoppingCartContext, useSearch } from "~/utils/appContextProvider"
+import { formatDisplayDate, formatRawDate } from "~/utils/formatDateAndTime"
+import EventBoxes from "./eventBoxes"
+import EventSideDrawer from "./eventSideDrawer"
 
 interface EventGridComponentProps {
-  searchTerm: string;
-  apiKey: string;
+  searchTerm: string
+  apiKey: string
 }
 
 const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
-  const { eventsByDate, loading, error } = useEventContext();
-  const { addToCart, removeFromCart, cart } = useShoppingCartContext();
-  const { searchTerm } = useSearch();
-  const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
-  const [showSideDrawer, setShowSideDrawer] = useState(false);
-  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
-  const availableEvents = Math.max(filteredEvents.length, 0);
-  let currentDate: string = '0000-00-00T00:00:00.000';
+  const { eventsByDate, loading, error } = useEventContext()
+  const { addToCart, removeFromCart, cart } = useShoppingCartContext()
+  const { searchTerm } = useSearch()
+  const [filteredEvents, setFilteredEvents] = useState<any[]>([])
+  const [showSideDrawer, setShowSideDrawer] = useState(false)
+  const [selectedEvent, setSelectedEvent] = useState<any | null>(null)
+  const availableEvents = Math.max(filteredEvents.length, 0)
+  let currentDate: string = "0000-00-00T00:00:00.000"
 
   useEffect(() => {
     if (!loading && !error) {
       const initialEventsList = Object.values(eventsByDate)
         .flat()
         .filter((event) => {
-          return (
-            event.startTime &&
-            event.endTime &&
-            event.title.toLowerCase().includes(searchTerm.toLowerCase())
-          );
+          return event.startTime && event.endTime && event.title.toLowerCase().includes(searchTerm.toLowerCase())
         })
         .sort((a, b) => {
-          const dateA: Date = new Date(formatRawDate(a.startTime));
-          const dateB: Date = new Date(formatRawDate(b.startTime));
+          const dateA: Date = new Date(formatRawDate(a.startTime))
+          const dateB: Date = new Date(formatRawDate(b.startTime))
 
-          return dateB.getTime() - dateA.getTime();
-        });
+          return dateB.getTime() - dateA.getTime()
+        })
 
       const filteredEventsNotInCart = initialEventsList.filter((event) => {
-        return !cart.some((item) => item._id === event._id);
-      });
+        return !cart.some((item) => item._id === event._id)
+      })
 
-      setFilteredEvents(filteredEventsNotInCart);
+      setFilteredEvents(filteredEventsNotInCart)
     }
-  }, [eventsByDate, loading, error, searchTerm, apiKey, cart]);
+  }, [eventsByDate, loading, error, searchTerm, apiKey, cart])
 
   const handleGoogleMapsLinkClick = (event: any) => {
-    setShowSideDrawer(true);
-    setSelectedEvent(event);
-  };
+    setShowSideDrawer(true)
+    setSelectedEvent(event)
+  }
 
   const handleCartIconClick = (event: any) => {
-    const isInCart = cart.some((item) => item._id === event._id);
-  
+    const isInCart = cart.some((item) => item._id === event._id)
+
     if (isInCart) {
-      removeFromCart(event);
+      removeFromCart(event)
     } else {
-      addToCart(event);
+      addToCart(event)
     }
-  };
-  
+  }
+
   const closeSideDrawer = () => {
-    setShowSideDrawer(false);
-  };
+    setShowSideDrawer(false)
+  }
 
   const openGoogleMapsInNewTab = () => {
     if (selectedEvent && selectedEvent.venue && selectedEvent.city && selectedEvent.country) {
       window.open(
-        `https://www.google.com/maps/dir//${encodeURIComponent(selectedEvent.venue.name)},${encodeURIComponent(selectedEvent.city)},${encodeURIComponent(selectedEvent.country)}`,
-        '_blank'
-      );
+        `https://www.google.com/maps/dir//${encodeURIComponent(selectedEvent.venue.name)},${encodeURIComponent(
+          selectedEvent.city
+        )},${encodeURIComponent(selectedEvent.country)}`,
+        "_blank"
+      )
     }
-  };
+  }
 
   const EventDateSeparator: React.FC<{ date: string; id: number }> = ({ date, id }) => {
     useEffect(() => {
-      const separatorElement = document.getElementById(`${id}`);
-      
+      const separatorElement = document.getElementById(`${id}`)
+
       if (separatorElement) {
-        const hasHideClass = Array.from(separatorElement.children).some(child => child.classList.contains('hide'));
-  
+        const hasHideClass = Array.from(separatorElement.children).some((child) => child.classList.contains("hide"))
+
         if (hasHideClass) {
-          console.log('has hide class');
+          console.log("has hide class")
         } else {
-          console.log('has NO hide class');
+          console.log("has NO hide class")
         }
       }
-    }, []);
-  
+    }, [])
+
     return (
       <div id={`Seperator__${id.toString()}`} className="eventDateSeparator">
-        <span>{`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span>:</span>
+        <span>
+          {`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span>:
+        </span>
       </div>
-    );
-  };
-  
+    )
+  }
+
   return (
     <>
       <div className="eventsResults">
@@ -102,12 +102,12 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
       </div>
 
       <div className="eventsGrid">
-        {filteredEvents.length > 0 && (
+        {filteredEvents.length > 0 &&
           filteredEvents.map((event, index) => {
-            const eventDate = formatRawDate(event.startTime);
+            const eventDate = formatRawDate(event.startTime)
 
             if (currentDate !== eventDate) {
-              currentDate = eventDate;
+              currentDate = eventDate
               return (
                 <React.Fragment key={`separator-${index}`}>
                   <EventDateSeparator id={index} date={currentDate} />
@@ -115,13 +115,13 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
                     key={event._id}
                     event={event}
                     index={index}
-                    handleCartIconClick={handleCartIconClick} 
+                    handleCartIconClick={handleCartIconClick}
                     handleGoogleMapsLinkClick={handleGoogleMapsLinkClick}
                     showSideDrawer={showSideDrawer}
                     selectedEvent={selectedEvent}
                   />
                 </React.Fragment>
-              );
+              )
             }
             return (
               <EventBoxes
@@ -133,9 +133,8 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
                 showSideDrawer={showSideDrawer}
                 selectedEvent={selectedEvent}
               />
-            );
-          })
-        )}
+            )
+          })}
       </div>
 
       <EventSideDrawer
@@ -146,7 +145,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
         openGoogleMapsInNewTab={openGoogleMapsInNewTab}
       />
     </>
-  );
-};
+  )
+}
 
-export default EventGridComponent;
+export default EventGridComponent

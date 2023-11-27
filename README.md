@@ -1,6 +1,6 @@
 # Welcome to Vennew!
 
-***Vennew*** *strives to be your go-to hub for organizing your musical experiences with ease. Explore upcoming events and concerts featuring your favorite artists or emerging talents, and find the best ticket deals online. Simplify your event journey by conveniently managing trip details, all in one platform.*
+**_Vennew_** _strives to be your go-to hub for organizing your musical experiences with ease. Explore upcoming events and concerts featuring your favorite artists or emerging talents, and find the best ticket deals online. Simplify your event journey by conveniently managing trip details, all in one platform._
 
 - The platform is built with [Remix Docs](https://remix.run/docs), TypeScript and powered by Elasticsearch
 - Styling is provided by Styled-Components
@@ -8,7 +8,7 @@
 ## Demo
 
 https://teclead.ollipaust.dev/
-  
+
 ## Development
 
 **Run the app in development mode:**
@@ -30,7 +30,6 @@ npm run build
 ```sh
 npm start
 ```
-
 
 ### Roadmap
 
@@ -57,5 +56,6 @@ npm start
 - Check JSON Data resource:https://teclead-ventures.github.io/data/london-events.json // CORS OK
 
 **UI Implementation & Styling**
+
 - web styling
 - mobile styling

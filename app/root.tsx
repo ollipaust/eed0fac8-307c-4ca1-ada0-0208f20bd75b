@@ -1,40 +1,33 @@
-import type { LinksFunction } from "@remix-run/node";
-import {
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-} from "@remix-run/react";
-import Layout from "./ui/components/layout";
+import type { LinksFunction } from "@remix-run/node"
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react"
+import Layout from "./ui/components/layout"
 
 // @ts-ignore
 import globalStylesheet from "./ui/styles/global.css"
 // @ts-ignore
-import uiStylesheet from './ui/styles/ui.css';
-import { AppContextProvider } from "./utils/appContextProvider";
+import uiStylesheet from "./ui/styles/ui.css"
+import { AppContextProvider } from "./utils/appContextProvider"
 
 export const links: LinksFunction = () => {
   return [
     {
       rel: "stylesheet",
-      href: "https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css"
     },
     {
       rel: "stylesheet",
-      href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css",
+      href: "https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
     },
     {
       rel: "stylesheet",
-      href: globalStylesheet,
+      href: globalStylesheet
     },
     {
       rel: "stylesheet",
-      href: uiStylesheet,
-    },
-  ];
-};
+      href: uiStylesheet
+    }
+  ]
+}
 export default function App() {
   return (
     <AppContextProvider>
@@ -55,5 +48,5 @@ export default function App() {
         </body>
       </html>
     </AppContextProvider>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-@import './variables.scss';
+@import "./variables.scss";
 
 .header {
   position: fixed;
@@ -108,58 +108,57 @@
   top: $header-height;
   min-height: calc(100vh - 200px);
 
-    // Responsive styles
-    @media screen and (max-width: $breakpoint-large) {
-        padding: 4rem 0;
-    }
+  // Responsive styles
+  @media screen and (max-width: $breakpoint-large) {
+    padding: 4rem 0;
+  }
 }
 
 .eventsGrid {
-    display: grid;
-    position: relative;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 1rem;
-    width: fit-content;
-    margin: 0 auto;
-  
-    .eventDateSeparator {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      position: sticky;
-      top: $header-height;
-      background-color: $light;
-      z-index: 1;
-      width: 100%;
-      height: auto;
-      padding: 1rem 0;
-      grid-column: span 3;
-  
+  display: grid;
+  position: relative;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  width: fit-content;
+  margin: 0 auto;
+
+  .eventDateSeparator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    top: $header-height;
+    background-color: $light;
+    z-index: 1;
+    width: 100%;
+    height: auto;
+    padding: 1rem 0;
+    grid-column: span 3;
+
+    > span {
+      display: block;
+      font-weight: bold;
+
       > span {
-        display: block;
-        font-weight: bold;
-  
-        > span {
-          color: $secondary;
-        }
+        color: $secondary;
       }
-    }
-  
-    // Responsive styles
-    @media screen and (max-width: $breakpoint-large) {
-      grid-template-columns: repeat(1, 1fr);
-  
-      grid-column: span 3;
-      .eventDateSeparator {
-        grid-column: span 1;
-      }
-    }
-  
-    @media screen and (max-width: $breakpoint-medium) {
-      grid-template-columns: repeat(1, 1fr);
     }
   }
-  
+
+  // Responsive styles
+  @media screen and (max-width: $breakpoint-large) {
+    grid-template-columns: repeat(1, 1fr);
+
+    grid-column: span 3;
+    .eventDateSeparator {
+      grid-column: span 1;
+    }
+  }
+
+  @media screen and (max-width: $breakpoint-medium) {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
 
 .eventsResults {
   position: absolute;
@@ -228,7 +227,9 @@
       max-width: 600px;
       transform: scale(1);
       filter: none;
-      transition: filter 1s ease, transform 2s ease;
+      transition:
+        filter 1s ease,
+        transform 2s ease;
     }
 
     .svgCartIcon {
@@ -256,8 +257,10 @@
         border-radius: $box-radius-circle;
         opacity: 1;
         background-color: #f0eee9;
-        transform: translate(-100%, -100%) scale(.6);
-        transition: opacity 0.5s ease, transform 0.5s ease;
+        transform: translate(-100%, -100%) scale(0.6);
+        transition:
+          opacity 0.5s ease,
+          transform 0.5s ease;
 
         &:hover {
           .svgCartIcon {
@@ -392,7 +395,9 @@
 
   &--inactive,
   &--active {
-    transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1), transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transition:
+      opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+      transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   &--inactive {
@@ -431,9 +436,9 @@
     font-size: 0.85rem;
     padding: 0.5rem;
 
-        &--empty {
-        margin-top: 0;
-        font-size: 0.85rem;
+    &--empty {
+      margin-top: 0;
+      font-size: 0.85rem;
     }
 
     > p {
@@ -462,7 +467,7 @@
       border-radius: 50%;
       width: 0.85rem;
       height: 0.85rem;
-      font-size: .625rem;
+      font-size: 0.625rem;
       pointer-events: none;
       transform: translateY(50%);
 
