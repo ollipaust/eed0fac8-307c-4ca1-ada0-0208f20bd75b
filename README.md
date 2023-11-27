@@ -38,7 +38,7 @@ Ensure that you meet the following software requirements before starting the ins
 
 ## Development
 
-*Before running dev, make sure you have created a .env file installed the peer dependencies via NPM!*
+*Before running dev, make sure you have created a .env file in the root directory and installed the peer dependencies via NPM!*
 
 ## Environment Variables
 
