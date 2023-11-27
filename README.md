@@ -2,7 +2,7 @@
 
 **_Vennew_** _strives to be your go-to hub for organizing your musical experiences with ease. Explore upcoming events and concerts featuring your favorite artists or emerging talents, and find the best ticket deals online. Simplify your event journey by conveniently managing trip details, all in one platform._
 
-- The platform is built with [Remix Docs](https://remix.run/docs), TypeScript, SCSS & custom Hooks
+- The platform is built with [@Remix-run](https://remix.run/docs), a React.js Framework focused on web standards and modern web app UX, to simply build better websites with TypeScript, SCSS & custom Hooks
 
 ## LIVE DEMO (CI/CD: Github > Netlify):
 
