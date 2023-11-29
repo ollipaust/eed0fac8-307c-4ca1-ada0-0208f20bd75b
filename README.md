@@ -46,7 +46,7 @@ Follow the instructions at [nvm-windows](https://github.com/coreybutler/nvm-wind
    npm install
 ```
 
-**3. Install peer dependencies:**
+**4. Install Netlify-Cli:**
 ```sh
     npm install -g netlify-cli
 ```
