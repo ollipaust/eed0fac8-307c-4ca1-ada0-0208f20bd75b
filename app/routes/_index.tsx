@@ -1,6 +1,5 @@
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
 import EventGridComponent from "~/ui/components/eventsGrid";
-import { useSearch } from "~/utils/appContextProvider";
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
@@ -8,20 +7,19 @@ export const meta: MetaFunction = () => {
 };
 
 export const loader: LoaderFunction = async () => {
-  const apiKey = process.env.GOOGLE_MAPS_API_KEY;
+  const apiKeyEnvironmentVar  = process.env.GOOGLE_MAPS_API_KEY;
 
   return {
-    apiKey: apiKey,
+    googleMapsApiKey: apiKeyEnvironmentVar,
   };
 };
 
 export default function Index() {
-  const { searchTerm } = useSearch();
-  const { apiKey } = useLoaderData<{ apiKey: string }>();
+  const { googleMapsApiKey } = useLoaderData<{ googleMapsApiKey: string }>();
 
   return (
     <>
-      <EventGridComponent searchTerm={searchTerm} apiKey={apiKey} />
+      <EventGridComponent googleMapsApiKey={googleMapsApiKey} />
     </>
   );
 }

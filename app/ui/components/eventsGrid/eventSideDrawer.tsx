@@ -3,10 +3,10 @@ import React from "react";
 const EventSideDrawer: React.FC<{
   showSideDrawer: boolean;
   selectedEvent: any;
-  apiKey: string;
+  googleMapsApiKey: string;
   closeSideDrawer: () => void;
   openGoogleMapsInNewTab: () => void;
-}> = ({ showSideDrawer, selectedEvent, apiKey, closeSideDrawer, openGoogleMapsInNewTab }) => {
+}> = ({ showSideDrawer, selectedEvent, googleMapsApiKey, closeSideDrawer, openGoogleMapsInNewTab }) => {
   const isVisible = showSideDrawer && selectedEvent;
 
   return (
@@ -21,7 +21,7 @@ const EventSideDrawer: React.FC<{
             style={{ border: "0" }}
             src={`https://www.google.com/maps/embed/v1/place?q=${encodeURIComponent(
               `${selectedEvent.venue.name}, ${selectedEvent.city}, ${selectedEvent.country}`,
-            )}&key=${apiKey}`}
+            )}&key=${googleMapsApiKey}`}
             allowFullScreen
           />
           <div className="googleMapsSideDrawer--hidden"></div>

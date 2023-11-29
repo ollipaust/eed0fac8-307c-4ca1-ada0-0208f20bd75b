@@ -5,11 +5,10 @@ import EventBoxes from "~/ui/components/eventsGrid/eventBoxes";
 import EventSideDrawer from "~/ui/components/eventsGrid/eventSideDrawer";
 
 interface EventGridComponentProps {
-  searchTerm: string;
-  apiKey: string;
+  googleMapsApiKey: string;
 }
 
-const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
+const EventGridComponent: React.FC<EventGridComponentProps> = ({ googleMapsApiKey }) => {
   const { eventsByDate, loading, error } = useEventContext();
   const { addToCart, removeFromCart, cart } = useShoppingCartContext();
   const { searchTerm } = useSearch();
@@ -39,7 +38,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
 
       setFilteredEvents(filteredEventsNotInCart);
     }
-  }, [eventsByDate, loading, error, searchTerm, apiKey, cart]);
+  }, [eventsByDate, loading, error, searchTerm, googleMapsApiKey, cart]);
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setSelectedEvent(event);
@@ -138,7 +137,7 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ apiKey }) => {
       <EventSideDrawer
         showSideDrawer={showSideDrawer}
         selectedEvent={selectedEvent}
-        apiKey={apiKey}
+        googleMapsApiKey={googleMapsApiKey}
         closeSideDrawer={closeSideDrawer}
         openGoogleMapsInNewTab={openGoogleMapsInNewTab}
       />
