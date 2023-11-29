@@ -1,7 +1,12 @@
 [build]
   command = "npm run build"
-  functions = ".netlify/functions-serve/.unzipped/server/.netlify/functions-internal"
+  functions = ".netlify\functions-serve\.unzipped\server\.netlify\functions-internal\server.mjs"
   publish = "public"
+
+[[redirects]]
+  from = "/*"
+  to = "/.netlify/functions/server"
+  status = 200
 
 [dev]
   command = "npm run dev"
