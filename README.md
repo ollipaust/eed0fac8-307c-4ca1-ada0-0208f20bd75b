@@ -12,14 +12,24 @@ https://teclead.ollipaust.dev/
 
 Ensure that you meet the following software requirements before starting the installation:
 
+- nvm (Node Version Manager) - Required for managing Node.js versions
 - Node.js (Version 18.0.0 or higher)
 - npm (Node Package Manager)
 - git (for working with Git repositories)
+- Netlify CLI (required for local Production Mode development using `netlify serve`)
 
-## Installation Steps:
+**Install nvm (Node Version Manager):**
+
+Follow the instructions at [nvm-windows](https://github.com/coreybutler/nvm-windows) to install `nvm`.
+
+```sh
+   nvm install 18
+   nvm use 18
+```
+
+## App Installation Steps:
 
 **1. Clone the Remix project from GitHub into your local directory:**
-
 
 ```sh
    git clone https://github.com/ollipaust/eed0fac8-307c-4ca1-ada0-0208f20bd75b.git vennew
@@ -34,6 +44,11 @@ Ensure that you meet the following software requirements before starting the ins
 **3. Install peer dependencies:**
 ```sh
    npm install
+```
+
+**3. Install peer dependencies:**
+```sh
+    npm install -g netlify-cli
 ```
 
 ## Development
