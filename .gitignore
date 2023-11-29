@@ -2,6 +2,7 @@ node_modules
 
 /.cache
 /public/build
+/public/_redirects
 /build
 .env
 /app/ui/styles/*.css
