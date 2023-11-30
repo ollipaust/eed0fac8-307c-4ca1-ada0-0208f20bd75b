@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useEffect, useState, Suspense } from "react";
+import React, {createContext, useContext, useEffect, useState, Suspense} from "react";
 
 // Event Context
 interface EventContextProps {
@@ -48,11 +48,11 @@ export const useShoppingCartContext = () => {
   if (!context) {
     throw new Error("useShoppingCartContext must be used within ShoppingCartProvider");
   }
-  return { ...context, maxCartItemsSelected };
+  return {...context, maxCartItemsSelected};
 };
 
 // Combined Context Provider
-export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const AppContextProvider: React.FC<{children: React.ReactNode}> = ({children}) => {
   const [events, setEvents] = useState<any[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<Error | null>(null);
@@ -88,7 +88,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
   useEffect(() => {
     const storedCart = localStorage.getItem("shopCart");
     if (storedCart) {
-      const { data, timestamp } = JSON.parse(storedCart);
+      const {data, timestamp} = JSON.parse(storedCart);
       const expirationTime = 24 * 60 * 60 * 1000; // 24h in ms
       if (Date.now() - timestamp <= expirationTime) {
         setCart(data);
@@ -98,7 +98,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   useEffect(() => {
     const timestamp = Date.now();
-    localStorage.setItem("shopCart", JSON.stringify({ data: shopCart, timestamp }));
+    localStorage.setItem("shopCart", JSON.stringify({data: shopCart, timestamp}));
   }, [shopCart]);
 
   const addToCart = (item: any) => {
@@ -113,11 +113,9 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   return (
     <Suspense fallback={<div>Loading Data...</div>}>
-      <EventContext.Provider value={{ eventsByDate, loading, error }}>
-        <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-          <ShoppingCartContext.Provider value={{ shopCart, addToCart, removeFromCart, maxCartItemsSelected }}>
-            {children}
-          </ShoppingCartContext.Provider>
+      <EventContext.Provider value={{eventsByDate, loading, error}}>
+        <SearchContext.Provider value={{searchTerm, setSearchTerm}}>
+          <ShoppingCartContext.Provider value={{shopCart, addToCart, removeFromCart, maxCartItemsSelected}}>{children}</ShoppingCartContext.Provider>
         </SearchContext.Provider>
       </EventContext.Provider>
     </Suspense>

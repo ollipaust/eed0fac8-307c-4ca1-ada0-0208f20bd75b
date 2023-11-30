@@ -35,7 +35,7 @@ interface TimeFormatProps {
   fallBackTime: string;
 }
 
-const TimeFormat: React.FC<TimeFormatProps> = ({ startTime, endTime, fallBackTime }) => {
+const TimeFormat: React.FC<TimeFormatProps> = ({startTime, endTime, fallBackTime}) => {
   if (!startTime || !endTime) {
     return "No date available.";
   }

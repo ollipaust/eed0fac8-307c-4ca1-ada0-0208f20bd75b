@@ -1,25 +1,38 @@
 import React from "react";
-import { SvgSearchIcon } from "~/ui/constants/svg/searchSvg";
-import { useSearch } from "~/utils/appContextProvider";
+import {SvgSearchIcon} from "~/ui/constants/svg/searchSvg";
+import {useSearch} from "~/utils/appContextProvider";
 import ShopCart from "~/ui/components/shopCart";
 
-const Header: React.FC = ({ props }: any) => {
-  const { searchTerm, setSearchTerm } = useSearch();
+const Header: React.FC = ({props}: any) => {
+  const {searchTerm, setSearchTerm} = useSearch();
 
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(e.target.value);
   };
 
   return (
-    <header id="Header" className="header" {...props}>
+    <header
+      id="Header"
+      className="header"
+      {...props}
+    >
       <div className="logo">
-        <a title="Vennew Logo" href="/">
+        <a
+          title="Vennew Logo"
+          href="/"
+        >
           <span>Vennew</span>
         </a>
       </div>
-      <div id="Search" className="eventSearch">
+      <div
+        id="Search"
+        className="eventSearch"
+      >
         <div className="searchInput__container">
-          <SvgSearchIcon width={32} height={32} />
+          <SvgSearchIcon
+            width={32}
+            height={32}
+          />
           <input
             className="eventSearchInput"
             type="text"

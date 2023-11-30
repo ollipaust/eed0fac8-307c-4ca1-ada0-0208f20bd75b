@@ -1,14 +1,14 @@
 import React from "react";
 import Header from "~/ui/components/header";
+import Content from "~/ui/components/content";
+import Footer from "~/ui/components/footer";
 
-const Layout: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+const Layout: React.FC<{children: React.ReactNode}> = ({children}) => {
   return (
     <>
       <Header />
-      <main className="mainContent">{children}</main>
-      <footer id="Footer" className="footer">
-        <p>&copy; {new Date().getFullYear()} Vennew | Made with &hearts; by Olli Paust</p>
-      </footer>
+      <Content>{children}</Content>
+      <Footer />
     </>
   );
 };

@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, {useState, useEffect} from "react";
 
 interface ImageLoaderProps {
   imageUrl: string;
   alt: string;
 }
 
-const ImageLoader: React.FC<ImageLoaderProps> = ({ imageUrl, alt }) => {
+const ImageLoader: React.FC<ImageLoaderProps> = ({imageUrl, alt}) => {
   const [imageStatus, setImageStatus] = useState<"loading" | "success" | "error">("loading");
 
   useEffect(() => {
@@ -33,7 +33,11 @@ const ImageLoader: React.FC<ImageLoaderProps> = ({ imageUrl, alt }) => {
     <>
       {imageStatus === "loading" && <span>Loading flyer...</span>}
       {imageStatus !== "loading" && (
-        <img className="flyerImg" src={imageStatus === "error" ? "/placeholder.png" : imageUrl} alt={alt} />
+        <img
+          className="flyerImg"
+          src={imageStatus === "error" ? "/placeholder.png" : imageUrl}
+          alt={alt}
+        />
       )}
     </>
   );

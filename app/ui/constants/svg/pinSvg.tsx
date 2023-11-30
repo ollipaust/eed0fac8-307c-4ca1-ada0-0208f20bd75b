@@ -6,7 +6,7 @@ interface SvgPinIconProps {
   height?: number;
 }
 
-export const SvgPinIcon: React.FC<SvgPinIconProps> = ({ className, width, height }) => (
+export const SvgPinIcon: React.FC<SvgPinIconProps> = ({className, width, height}) => (
   <svg
     className={`svgPinIcon svgPinIcon--${className}`}
     xmlns="http://www.w3.org/2000/svg"

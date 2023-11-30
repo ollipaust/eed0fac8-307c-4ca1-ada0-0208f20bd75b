@@ -1,8 +1,8 @@
 import React from "react";
-import { useSearch } from "~/utils/appContextProvider";
+import {useSearch} from "~/utils/appContextProvider";
 
 const EventSearch: React.FC = () => {
-  const { searchTerm, setSearchTerm } = useSearch();
+  const {searchTerm, setSearchTerm} = useSearch();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const term = e.target.value;
@@ -11,7 +11,12 @@ const EventSearch: React.FC = () => {
 
   return (
     <div>
-      <input type="text" placeholder="Search..." value={searchTerm} onChange={handleChange} />
+      <input
+        type="text"
+        placeholder="Search..."
+        value={searchTerm}
+        onChange={handleChange}
+      />
     </div>
   );
 };

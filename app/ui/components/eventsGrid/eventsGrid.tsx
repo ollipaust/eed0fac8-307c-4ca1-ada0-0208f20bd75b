@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useEventContext, useShoppingCartContext, useSearch } from "~/utils/appContextProvider";
-import { formatDisplayDate, formatRawDate } from "~/utils/formatDateAndTime";
+import React, {useEffect, useState} from "react";
+import {useEventContext, useShoppingCartContext, useSearch} from "~/utils/appContextProvider";
+import {formatDisplayDate, formatRawDate} from "~/utils/formatDateAndTime";
 import EventBoxes from "~/ui/components/eventsGrid/eventsBoxes";
 import EventSideDrawer from "~/ui/components/eventsGrid/eventsSideDrawer";
 
@@ -8,10 +8,10 @@ interface EventsGridComponentProps {
   googleMapsApiKey: string;
 }
 
-const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApiKey }) => {
-  const { eventsByDate, loading, error } = useEventContext();
-  const { addToCart, removeFromCart, shopCart } = useShoppingCartContext();
-  const { searchTerm } = useSearch();
+const EventsGridComponent: React.FC<EventsGridComponentProps> = ({googleMapsApiKey}) => {
+  const {eventsByDate, loading, error} = useEventContext();
+  const {addToCart, removeFromCart, shopCart} = useShoppingCartContext();
+  const {searchTerm} = useSearch();
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
@@ -23,11 +23,7 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
       const initialEventsList = Object.values(eventsByDate)
         .flat()
         .filter((event) => {
-          return (
-            event.startTime &&
-            event.endTime &&
-            event.title.toLowerCase().includes(searchTerm.toLowerCase())
-          );
+          return event.startTime && event.endTime && event.title.toLowerCase().includes(searchTerm.toLowerCase());
         })
         .sort((a, b) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
@@ -66,25 +62,26 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
   const openGoogleMapsInNewTab = () => {
     if (selectedEvent && selectedEvent.venue && selectedEvent.city && selectedEvent.country) {
       window.open(
-        `https://www.google.com/maps/dir//${encodeURIComponent(selectedEvent.venue.name)},${encodeURIComponent(
-          selectedEvent.city,
-        )},${encodeURIComponent(selectedEvent.country)}`,
+        `https://www.google.com/maps/dir//${encodeURIComponent(selectedEvent.venue.name)},${encodeURIComponent(selectedEvent.city)},${encodeURIComponent(selectedEvent.country)}`,
         "_blank",
       );
     }
   };
 
-  const EventDateSeparator: React.FC<{ separatorDisplayedDate: string; id: number }> = ({ separatorDisplayedDate, id }) => {
+  const EventDateSeparator: React.FC<{separatorDisplayedDate: string; id: number}> = ({separatorDisplayedDate, id}) => {
     const separatorId = `Separator__${id}`;
-  
+
     return (
-      <div id={separatorId} className="eventDateSeparator">
+      <div
+        id={separatorId}
+        className="eventDateSeparator"
+      >
         <span>
           All events scheduled for&nbsp;<span>{formatDisplayDate(separatorDisplayedDate)}</span>:
         </span>
       </div>
     );
-  };  
+  };
 
   return (
     <>
@@ -101,7 +98,10 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
             currentDate = eventDate;
             return (
               <React.Fragment key={`separator-${index}`}>
-                <EventDateSeparator id={index} separatorDisplayedDate={eventDate} />
+                <EventDateSeparator
+                  id={index}
+                  separatorDisplayedDate={eventDate}
+                />
                 <EventBoxes
                   key={event._id}
                   event={event}

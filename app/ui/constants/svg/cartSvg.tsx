@@ -7,7 +7,7 @@ interface SvgCartIconFullProps {
   cartItemCount?: number;
 }
 
-export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({ svgCartType, width, height, cartItemCount }) => {
+export const SvgCartIconFull: React.FC<SvgCartIconFullProps> = ({svgCartType, width, height, cartItemCount}) => {
   return (
     <>
       <svg
@@ -37,14 +37,7 @@ interface SvgCartIconPlusProps {
   className?: string;
 }
 
-export const SvgCartIconPlus: React.FC<SvgCartIconPlusProps> = ({
-  id,
-  svgCartType,
-  width,
-  height,
-  onClick,
-  className,
-}) => (
+export const SvgCartIconPlus: React.FC<SvgCartIconPlusProps> = ({id, svgCartType, width, height, onClick, className}) => (
   <svg
     id={id}
     className={`svgCartIcon svgCartIcon--${svgCartType} ${className}`}

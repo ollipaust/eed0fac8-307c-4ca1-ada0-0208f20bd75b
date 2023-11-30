@@ -36,24 +36,27 @@ Follow the instructions at [nvm-windows](https://github.com/coreybutler/nvm-wind
 ```
 
 **2. Change current directory & open VS Code:**
+
 ```sh
    cd vennew
    code . (if you use VSCode)
 ```
 
 **3. Install peer dependencies:**
+
 ```sh
    npm install
 ```
 
 **4. Install Netlify-Cli:**
+
 ```sh
     npm install -g netlify-cli
 ```
 
 ## Development
 
-*Before running dev, make sure you have created a .env file in the root directory and installed the peer dependencies via NPM!*
+_Before running dev, make sure you have created a .env file in the root directory and installed the peer dependencies via NPM!_
 
 ## Environment Variables
 

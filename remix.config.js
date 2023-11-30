@@ -1,4 +1,4 @@
-import { config } from "@netlify/remix-adapter";
+import {config} from "@netlify/remix-adapter";
 
 /** @type {import('@remix-run/dev').AppConfig} */
 export default {

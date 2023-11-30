@@ -1,12 +1,12 @@
-import type { LinksFunction } from "@remix-run/node";
-import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration } from "@remix-run/react";
+import type {LinksFunction} from "@remix-run/node";
+import {Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration} from "@remix-run/react";
 import Layout from "~/ui/components/layout";
 
 // @ts-ignore
 import globalStylesheet from "~/ui/styles/global.css";
 // @ts-ignore
 import uiStylesheet from "~/ui/styles/ui.css";
-import { AppContextProvider } from "~/utils/appContextProvider";
+import {AppContextProvider} from "~/utils/appContextProvider";
 
 export const links: LinksFunction = () => {
   return [
@@ -34,7 +34,10 @@ export default function App() {
       <html lang="en">
         <head>
           <meta charSet="utf-8" />
-          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1"
+          />
           <Meta />
           <Links />
         </head>
