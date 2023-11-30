@@ -34,7 +34,7 @@ export const useSearch = () => {
 };
 
 interface ShoppingCartContextProps {
-  cart: any[];
+  shopCart: any[];
   addToCart: (item: any) => void;
   removeFromCart: (item: any) => void;
   maxCartItemsSelected: number;
@@ -83,10 +83,10 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   // Search Provider Logic
   const [searchTerm, setSearchTerm] = useState<string>("");
-  const [cart, setCart] = useState<any[]>([]);
+  const [shopCart, setCart] = useState<any[]>([]);
 
   useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
+    const storedCart = localStorage.getItem("shopCart");
     if (storedCart) {
       const { data, timestamp } = JSON.parse(storedCart);
       const expirationTime = 24 * 60 * 60 * 1000; // 24h in ms
@@ -98,11 +98,11 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
 
   useEffect(() => {
     const timestamp = Date.now();
-    localStorage.setItem("cart", JSON.stringify({ data: cart, timestamp }));
-  }, [cart]);
+    localStorage.setItem("shopCart", JSON.stringify({ data: shopCart, timestamp }));
+  }, [shopCart]);
 
   const addToCart = (item: any) => {
-    if (!cart.some((cartItem) => cartItem._id === item._id)) {
+    if (!shopCart.some((cartItem) => cartItem._id === item._id)) {
       setCart((prevCart) => [...prevCart, item]);
     }
   };
@@ -115,7 +115,7 @@ export const AppContextProvider: React.FC<{ children: React.ReactNode }> = ({ ch
     <Suspense fallback={<div>Loading Data...</div>}>
       <EventContext.Provider value={{ eventsByDate, loading, error }}>
         <SearchContext.Provider value={{ searchTerm, setSearchTerm }}>
-          <ShoppingCartContext.Provider value={{ cart, addToCart, removeFromCart, maxCartItemsSelected }}>
+          <ShoppingCartContext.Provider value={{ shopCart, addToCart, removeFromCart, maxCartItemsSelected }}>
             {children}
           </ShoppingCartContext.Provider>
         </SearchContext.Provider>

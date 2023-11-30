@@ -13,8 +13,8 @@ const EventBoxes: React.FC<{
   openGoogleMapsInNewTab: (event: any) => void;
 }> = React.memo(
   ({ event, index, selectedEvent, handleCartIconClick, openGoogleMapsInNewTab }) => {
-    const { addToCart, cart, maxCartItemsSelected } = useShoppingCartContext();
-    const isAddToCartDisabled = cart.length >= maxCartItemsSelected;
+    const { addToCart, shopCart, maxCartItemsSelected } = useShoppingCartContext();
+    const isAddToCartDisabled = shopCart.length >= maxCartItemsSelected;
 
     return (
       <div id={`EventsCardBox__${index}`} key={`${event._id}`} className={`eventsCardBox eventsCardBox__${index}`}>

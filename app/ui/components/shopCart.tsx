@@ -4,7 +4,7 @@ import { useShoppingCartContext } from "~/utils/appContextProvider";
 import TimeFormat from "~/utils/formatDateAndTime";
 
 const ShopCartComponent = () => {
-  const { cart, removeFromCart, maxCartItemsSelected } = useShoppingCartContext();
+  const { shopCart, removeFromCart, maxCartItemsSelected } = useShoppingCartContext();
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const maxTitleLength = 35;
@@ -39,7 +39,7 @@ const ShopCartComponent = () => {
     };
   }, []);
 
-  const countedItems = cart.reduce((total, item) => total + (item.quantity || 1), 0);
+  const countedItems = shopCart.reduce((total, item) => total + (item.quantity || 1), 0);
 
   const cropTitle = (title: string, maxLength: number) => {
     return title.length > maxLength ? `${title.substring(0, maxLength - 3)}...` : title;
@@ -47,21 +47,21 @@ const ShopCartComponent = () => {
 
   return (
     <div className="shopCart__container" ref={containerRef}>
-      <button className="shopCart__handler" onClick={handleClick} aria-label="Shopping Cart" role="button">
-        <SvgCartIconFull svgCartType="full" width={32} height={32} cartItemCount={cart.length} />
+      <button className="shopCart__handler" onClick={handleClick} aria-label="Shopping shopCart" role="button">
+        <SvgCartIconFull svgCartType="full" width={32} height={32} cartItemCount={shopCart.length} />
       </button>
       <div className={`shopCart shopCart--${isActive ? "active" : "inactive"}`}>
         <div className="shopCart__header dark">
-          <b>Total Items in your Cart:&nbsp;</b>
+          <b>Total Items in your shopCart:&nbsp;</b>
           <span>{countedItems}</span>
           {countedItems < maxCartItemsSelected ? null : (
             <div className="warningText">Limit of {maxCartItemsSelected} items reached!</div>
           )}
         </div>
-        {cart.length > 0 ? (
+        {shopCart.length > 0 ? (
           <>
             <ul className="shopCart__itemsList">
-              {cart.map((item, index) => (
+              {shopCart.map((item, index) => (
                 <li className="shopCart__item" key={item._id}>
                   <div className="dark">{`${index + 1}. ${cropTitle(item.title, maxTitleLength)}`}</div>
                   <button

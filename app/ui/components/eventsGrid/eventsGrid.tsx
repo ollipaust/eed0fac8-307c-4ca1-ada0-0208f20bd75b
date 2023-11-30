@@ -10,7 +10,7 @@ interface EventsGridComponentProps {
 
 const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApiKey }) => {
   const { eventsByDate, loading, error } = useEventContext();
-  const { addToCart, removeFromCart, cart } = useShoppingCartContext();
+  const { addToCart, removeFromCart, shopCart } = useShoppingCartContext();
   const { searchTerm } = useSearch();
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
   const [showSideDrawer, setShowSideDrawer] = useState(false);
@@ -23,7 +23,11 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
       const initialEventsList = Object.values(eventsByDate)
         .flat()
         .filter((event) => {
-          return event.startTime && event.endTime && event.title.toLowerCase().includes(searchTerm.toLowerCase());
+          return (
+            event.startTime &&
+            event.endTime &&
+            event.title.toLowerCase().includes(searchTerm.toLowerCase())
+          );
         })
         .sort((a, b) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
@@ -33,12 +37,12 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
         });
 
       const filteredEventsNotInCart = initialEventsList.filter((event) => {
-        return !cart.some((item) => item._id === event._id);
+        return !shopCart.some((item) => item._id === event._id);
       });
 
       setFilteredEvents(filteredEventsNotInCart);
     }
-  }, [eventsByDate, loading, error, searchTerm, googleMapsApiKey, cart]);
+  }, [eventsByDate, loading, error, searchTerm, googleMapsApiKey, shopCart]);
 
   const handleGoogleMapsLinkClick = (event: any) => {
     setSelectedEvent(event);
@@ -46,7 +50,7 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
   };
 
   const handleCartIconClick = (event: any) => {
-    const isInCart = cart.some((item) => item._id === event._id);
+    const isInCart = shopCart.some((item) => item._id === event._id);
 
     if (isInCart) {
       removeFromCart(event);
@@ -70,13 +74,13 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
     }
   };
 
-  const EventDateSeparator: React.FC<{ date: string; id: number }> = ({ date, id }) => {
+  const EventDateSeparator: React.FC<{ separatorDisplayedDate: string; id: number }> = ({ separatorDisplayedDate, id }) => {
     const separatorId = `Separator__${id}`;
   
     return (
       <div id={separatorId} className="eventDateSeparator">
         <span>
-          All events scheduled for&nbsp;<span>{formatDisplayDate(date)}</span>:
+          All events scheduled for&nbsp;<span>{formatDisplayDate(separatorDisplayedDate)}</span>:
         </span>
       </div>
     );
@@ -89,37 +93,38 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApi
       </div>
 
       <div className="eventsGrid">
-        {filteredEvents.length > 0 &&
-          filteredEvents.map((event, index) => {
-            const eventDate = formatRawDate(event.startTime);
+        {filteredEvents.map((event, index) => {
+          const eventDate = formatRawDate(event.startTime);
+          const isDifferentDate = currentDate !== eventDate;
 
-            if (currentDate !== eventDate) {
-              currentDate = eventDate;
-              return (
-                <React.Fragment key={`separator-${index}`}>
-                  <EventDateSeparator id={index} date={currentDate} />
-                  <EventBoxes
-                    key={event._id}
-                    event={event}
-                    index={index}
-                    handleCartIconClick={handleCartIconClick}
-                    openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
-                    selectedEvent={selectedEvent}
-                  />
-                </React.Fragment>
-              );
-            }
+          if (isDifferentDate) {
+            currentDate = eventDate;
             return (
-              <EventBoxes
-                key={event._id}
-                event={event}
-                index={index}
-                handleCartIconClick={handleCartIconClick}
-                openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
-                selectedEvent={selectedEvent}
-              />
+              <React.Fragment key={`separator-${index}`}>
+                <EventDateSeparator id={index} separatorDisplayedDate={eventDate} />
+                <EventBoxes
+                  key={event._id}
+                  event={event}
+                  index={index}
+                  handleCartIconClick={handleCartIconClick}
+                  openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
+                  selectedEvent={selectedEvent}
+                />
+              </React.Fragment>
             );
-          })}
+          }
+
+          return (
+            <EventBoxes
+              key={event._id}
+              event={event}
+              index={index}
+              handleCartIconClick={handleCartIconClick}
+              openGoogleMapsInNewTab={handleGoogleMapsLinkClick}
+              selectedEvent={selectedEvent}
+            />
+          );
+        })}
       </div>
 
       <EventSideDrawer
