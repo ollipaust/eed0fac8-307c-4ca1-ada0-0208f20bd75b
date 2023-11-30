@@ -1,5 +1,5 @@
 import type { MetaFunction, LoaderFunction } from "@remix-run/node";
-import EventGridComponent from "~/ui/components/eventsGrid";
+import EventsGridComponent from "~/ui/components/eventsGrid/eventsGrid";
 import { useLoaderData } from "@remix-run/react";
 
 export const meta: MetaFunction = () => {
@@ -19,7 +19,7 @@ export default function Index() {
 
   return (
     <>
-      <EventGridComponent googleMapsApiKey={googleMapsApiKey} />
+      <EventsGridComponent googleMapsApiKey={googleMapsApiKey} />
     </>
   );
 }

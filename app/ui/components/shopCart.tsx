@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { SvgCartIconFull } from "~/ui/constants/svg/cartSvg";
 import { useShoppingCartContext } from "~/utils/appContextProvider";
 import TimeFormat from "~/utils/formatDateAndTime";
 
-const ShopCartHandler: React.FC = () => {
+const ShopCartComponent = () => {
   const { cart, removeFromCart, maxCartItemsSelected } = useShoppingCartContext();
   const [isActive, setIsActive] = useState(false);
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -92,4 +92,4 @@ const ShopCartHandler: React.FC = () => {
   );
 };
 
-export default ShopCartHandler;
+export default ShopCartComponent;

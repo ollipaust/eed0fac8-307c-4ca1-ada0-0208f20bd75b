@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useEventContext, useShoppingCartContext, useSearch } from "~/utils/appContextProvider";
 import { formatDisplayDate, formatRawDate } from "~/utils/formatDateAndTime";
-import EventBoxes from "~/ui/components/eventsGrid/eventBoxes";
-import EventSideDrawer from "~/ui/components/eventsGrid/eventSideDrawer";
+import EventBoxes from "~/ui/components/eventsGrid/eventsBoxes";
+import EventSideDrawer from "~/ui/components/eventsGrid/eventsSideDrawer";
 
-interface EventGridComponentProps {
+interface EventsGridComponentProps {
   googleMapsApiKey: string;
 }
 
-const EventGridComponent: React.FC<EventGridComponentProps> = ({ googleMapsApiKey }) => {
+const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApiKey }) => {
   const { eventsByDate, loading, error } = useEventContext();
   const { addToCart, removeFromCart, cart } = useShoppingCartContext();
   const { searchTerm } = useSearch();
@@ -71,28 +71,16 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ googleMapsApiKe
   };
 
   const EventDateSeparator: React.FC<{ date: string; id: number }> = ({ date, id }) => {
-    useEffect(() => {
-      const separatorElement = document.getElementById(`${id}`);
-
-      if (separatorElement) {
-        const hasHideClass = Array.from(separatorElement.children).some((child) => child.classList.contains("hide"));
-
-        if (hasHideClass) {
-          console.log("has hide class");
-        } else {
-          console.log("has NO hide class");
-        }
-      }
-    }, []);
-
+    const separatorId = `Separator__${id}`;
+  
     return (
-      <div id={`Seperator__${id.toString()}`} className="eventDateSeparator">
+      <div id={separatorId} className="eventDateSeparator">
         <span>
-          {`All events scheduled for`}&nbsp;<span>{formatDisplayDate(date)}</span>:
+          All events scheduled for&nbsp;<span>{formatDisplayDate(date)}</span>:
         </span>
       </div>
     );
-  };
+  };  
 
   return (
     <>
@@ -145,4 +133,4 @@ const EventGridComponent: React.FC<EventGridComponentProps> = ({ googleMapsApiKe
   );
 };
 
-export default EventGridComponent;
+export default EventsGridComponent;
