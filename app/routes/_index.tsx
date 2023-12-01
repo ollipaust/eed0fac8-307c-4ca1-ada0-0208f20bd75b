@@ -1,6 +1,7 @@
 import type {MetaFunction, LoaderFunction} from "@remix-run/node";
 import EventsGridComponent from "~/ui/components/eventsGrid/eventsGrid";
-import {useLoaderData} from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
+import { useEventContext } from "~/utils/appContextProvider";
 
 export const meta: MetaFunction = () => {
   return [{title: "Vennew - Events"}, {name: "description", content: "Welcome to Remix!"}];
@@ -16,10 +17,12 @@ export const loader: LoaderFunction = async () => {
 
 export default function Index() {
   const {googleMapsApiKey} = useLoaderData<{googleMapsApiKey: string}>();
+  const { loading } = useEventContext();
+  console.log(typeof googleMapsApiKey)
 
-  return (
+  return ( 
     <>
-      <EventsGridComponent googleMapsApiKey={googleMapsApiKey} />
+      <EventsGridComponent googleMapsApiKey={googleMapsApiKey as string} />
     </>
   );
 }

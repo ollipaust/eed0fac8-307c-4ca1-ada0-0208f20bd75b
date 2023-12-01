@@ -6,8 +6,8 @@ import ShopCart from "~/ui/components/shopCart";
 const Header: React.FC = ({props}: any) => {
   const {searchTerm, setSearchTerm} = useSearch();
 
-  const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(e.target.value);
+  const handleSearch = (searchHandle: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(searchHandle.target.value);
   };
 
   return (

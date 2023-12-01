@@ -8,12 +8,12 @@ interface EventsGridComponentProps {
   googleMapsApiKey: string;
 }
 
-const EventsGridComponent: React.FC<EventsGridComponentProps> = ({googleMapsApiKey}) => {
+const EventsGridComponent: React.FC<EventsGridComponentProps> = ({ googleMapsApiKey }) => {
   const {eventsByDate, loading, error} = useEventContext();
   const {addToCart, removeFromCart, shopCart} = useShoppingCartContext();
   const {searchTerm} = useSearch();
   const [filteredEvents, setFilteredEvents] = useState<any[]>([]);
-  const [showSideDrawer, setShowSideDrawer] = useState(false);
+  const [showSideDrawer, setShowSideDrawer] = useState<boolean>(false);
   const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
   const availableEvents = Math.max(filteredEvents.length, 0);
   let currentDate: string = "0000-00-00T00:00:00.000";
@@ -22,20 +22,20 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({googleMapsApiK
     if (!loading && !error) {
       const initialEventsList = Object.values(eventsByDate)
         .flat()
-        .filter((event) => {
+        .filter((event: any) => {
           return event.startTime && event.endTime && event.title.toLowerCase().includes(searchTerm.toLowerCase());
         })
-        .sort((a, b) => {
+        .sort((a: any, b: any) => {
           const dateA: Date = new Date(formatRawDate(a.startTime));
           const dateB: Date = new Date(formatRawDate(b.startTime));
-
+  
           return dateB.getTime() - dateA.getTime();
         });
-
+  
       const filteredEventsNotInCart = initialEventsList.filter((event) => {
         return !shopCart.some((item) => item._id === event._id);
       });
-
+  
       setFilteredEvents(filteredEventsNotInCart);
     }
   }, [eventsByDate, loading, error, searchTerm, googleMapsApiKey, shopCart]);
@@ -90,7 +90,7 @@ const EventsGridComponent: React.FC<EventsGridComponentProps> = ({googleMapsApiK
       </div>
 
       <div className="eventsGrid">
-        {filteredEvents.map((event, index) => {
+        {filteredEvents.map((event: any, index: number) => {
           const eventDate = formatRawDate(event.startTime);
           const isDifferentDate = currentDate !== eventDate;
 

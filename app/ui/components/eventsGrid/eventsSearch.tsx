@@ -4,8 +4,8 @@ import {useSearch} from "~/utils/appContextProvider";
 const EventSearch: React.FC = () => {
   const {searchTerm, setSearchTerm} = useSearch();
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const term = e.target.value;
+  const handleChange = (searchHandle: React.ChangeEvent<HTMLInputElement>) => {
+    const term = searchHandle.target.value;
     setSearchTerm(term);
   };
 
