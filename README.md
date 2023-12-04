@@ -6,7 +6,7 @@
 
 ## LIVE DEMO (CI/CD: Github > Netlify):
 
-https://teclead.ollipaust.dev/
+https://vennew.ollipaust.dev/
 
 ## Prerequisites
 
